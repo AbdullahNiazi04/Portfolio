@@ -1,6 +1,52 @@
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------------------
+   FONTS — self-hosted, latin subset only.
+
+   Previously these came from fonts.googleapis.com, which put a third-party
+   stylesheet on the critical path: DNS, TLS and a round trip before any text
+   could paint. Serving them from our own origin removes that entirely.
+
+   Space Grotesk, Manrope and JetBrains Mono are variable fonts, so one file
+   covers every weight — Google serves the same file for each weight anyway.
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Silkscreen';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/silkscreen-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Silkscreen';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/silkscreen-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/manrope-var.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-var.woff2') format('woff2');
+}
+
+/* ---------------------------------------------------------------------------
    DARK VARIANT
    Matches both an explicit choice and the system preference, so `dark:`
    utilities behave correctly in all three states (light / dark / system).

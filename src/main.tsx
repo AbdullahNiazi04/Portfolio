@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { App } from './App';
 import { ThemeProvider } from './lib/theme';
+import { MotionProvider } from './lib/motion';
 import './index.css';
 
 const rootEl = document.getElementById('root');
@@ -12,7 +13,9 @@ createRoot(rootEl).render(
   <StrictMode>
     <ThemeProvider>
       <BrowserRouter>
-        <App />
+        <MotionProvider>
+          <App />
+        </MotionProvider>
       </BrowserRouter>
     </ThemeProvider>
   </StrictMode>,

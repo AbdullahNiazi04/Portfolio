@@ -24,11 +24,32 @@
       })();
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!--
+      Fonts are self-hosted (see src/index.css). Only the three faces used above
+      the fold are preloaded: the pixel face for headings, and the label and body
+      faces. JetBrains Mono is deliberately not preloaded — it first appears in
+      the metrics further down the page.
+    -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="/fonts/silkscreen-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/space-grotesk-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/manrope-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
 
     <title>Abdullah Khan Niazi — Full-Stack Developer, AI / Edge ML</title>

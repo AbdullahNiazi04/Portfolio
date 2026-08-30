@@ -1,7 +1,7 @@
 import { Container } from '@/components/Container';
 import { Marquee } from '@/components/Marquee';
 import { SectionHeading } from '@/components/SectionHeading';
-import { Seo } from '@/components/Seo';
+import { PersonSchema, Seo } from '@/components/Seo';
 import { ProjectCard } from '@/components/ProjectCard';
 import { AlsoBuilt } from '@/components/AlsoBuilt';
 import { WavyDivider, Wordmarks } from '@/components/Ornaments';
@@ -101,6 +101,7 @@ export function Home() {
         description={positioning}
         path="/"
       />
+      <PersonSchema />
 
       <Hero />
       <WavyDivider />

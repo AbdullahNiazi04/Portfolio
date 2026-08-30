@@ -59,6 +59,18 @@ All colour lives in `src/index.css`. The rules that matter:
 - Measured: **6.92:1** minimum in light, **7.59:1** minimum in dark, across 61
   text nodes.
 
+### Fonts
+
+Self-hosted from `public/fonts`, latin subset only, 94 KB across five files.
+Space Grotesk, Manrope and JetBrains Mono are variable, so one file covers every
+weight — Google serves the same file per weight anyway, so requesting four
+weights of Manrope was downloading the same 25 KB four times.
+
+They were previously loaded from `fonts.googleapis.com`, which put a
+third-party stylesheet on the critical path. Removing it took First Contentful
+Paint from 3.2 s to 2.0 s. The three faces used above the fold are preloaded in
+`index.html`; JetBrains Mono is not, because it first appears further down.
+
 ### Typography
 
 `Silkscreen` is display-only — the hero name and `h2` section headings, never
@@ -103,6 +115,33 @@ Then either push to GitHub and import the repo in the Vercel dashboard, or run
 (excluding `/api/`) and immutable caching for hashed assets.
 
 Once the domain is known, update `SITE_URL` in `src/lib/site.ts` — see `TODO.md`.
+
+## SEO files
+
+`public/robots.txt` and `public/sitemap.xml` are **generated**, not hand-written.
+`scripts/gen-seo.mjs` reads `SITE_URL` from `src/lib/site.ts` and writes both on
+every build, so a domain change cannot leave them pointing at the old host. Add
+new routes to the `routes` array in that script.
+
+`public/og.png` is generated from the portrait — see the git history for the
+script if it needs regenerating.
+
+## Lighthouse
+
+Mobile profile, against `vite preview`:
+
+| Category | Score |
+|---|---|
+| Performance | 97 |
+| Accessibility | 100 |
+| Best Practices | 100 |
+| SEO | 100 |
+
+FCP 1.8 s · LCP 2.3 s · TBT 80 ms · CLS 0 · Speed Index 1.8 s.
+
+Framer Motion is loaded through `LazyMotion` with the `domAnimation` feature set
+and the `m` components, rather than the full `motion` bundle. That is worth
+about 14 KB gzipped on first load.
 
 ## Content model
 

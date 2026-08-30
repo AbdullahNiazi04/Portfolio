@@ -1,5 +1,20 @@
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import {
+  domAnimation,
+  LazyMotion,
+  m,
+  useReducedMotion,
+  type Variants,
+} from 'framer-motion';
 import type { ReactNode } from 'react';
+
+/**
+ * Loads only the DOM animation feature set rather than the whole library.
+ * `m` is the same component API as `motion` with the features supplied by this
+ * provider instead of bundled in, which is what keeps the unused-JS cost down.
+ */
+export function MotionProvider({ children }: { children: ReactNode }) {
+  return <LazyMotion features={domAnimation}>{children}</LazyMotion>;
+}
 
 /**
  * Entrance motion only: fade plus an 8px rise, 260ms, staggered by 60ms at
@@ -21,7 +36,7 @@ export function Reveal({
   const reduced = useReducedMotion();
 
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ opacity: 0, y: reduced ? 0 : 8 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +44,7 @@ export function Reveal({
       transition={{ duration: reduced ? 0 : 0.26, delay: reduced ? 0 : delay, ease: 'easeOut' }}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -51,7 +66,7 @@ export function RevealList({
   };
 
   return (
-    <motion.ul
+    <m.ul
       className={className}
       variants={container}
       initial="hidden"
@@ -59,7 +74,7 @@ export function RevealList({
       viewport={{ once: true, margin: '-60px' }}
     >
       {children}
-    </motion.ul>
+    </m.ul>
   );
 }
 
@@ -82,8 +97,8 @@ export function RevealItem({
   };
 
   return (
-    <motion.li className={className} variants={item}>
+    <m.li className={className} variants={item}>
       {children}
-    </motion.li>
+    </m.li>
   );
 }
