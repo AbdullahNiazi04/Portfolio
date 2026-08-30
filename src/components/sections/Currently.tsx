@@ -42,7 +42,17 @@ export function Currently() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <p className="max-w-[46ch] leading-relaxed text-paper/80">
+            <p className="label-type text-[0.6rem] text-paper/70">Course outline</p>
+            <ul className="mt-3 grid gap-2">
+              {currently.topics.map((t) => (
+                <li key={t} className="flex gap-3 text-[0.9rem] leading-snug">
+                  <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 bg-mint" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-7 max-w-[46ch] border-t-2 border-dashed border-paper/25 pt-6 leading-relaxed text-paper/80">
               {currently.direction}
             </p>
           </Reveal>

@@ -95,12 +95,9 @@ export const stackGroups: StackGroup[] = [
   },
   {
     name: 'AI / ML',
-    // TODO(abdullah): confirm TensorFlow — it is on the CV but appears in none
-    // of the audited repos. Drop it, or move it to `familiar` like C++.
     items: [
       'PyTorch',
       'scikit-learn',
-      'TensorFlow',
       'sentence-transformers',
       'Flower (federated learning)',
       'Whisper',
@@ -108,6 +105,7 @@ export const stackGroups: StackGroup[] = [
       'Model optimisation for edge',
       'BeautifulSoup / pandas',
     ],
+    familiar: ['TensorFlow'],
   },
   {
     name: 'Infra',
@@ -180,13 +178,18 @@ export const education = {
  * Education section: while it is in progress it is current learning, not a
  * credential. It moves to Education once complete, with a date.
  *
- * TODO(abdullah): if you want the syllabus named, supply the actual topics.
- * The previous copy listed agent architectures, tool use, orchestration and
- * evaluation — that was written for an "Agentic AI" course and does not
- * necessarily describe this one, so it has been removed rather than guessed at.
+ * The topic list is the course's own outline, supplied verbatim.
  */
 export const currently = {
   body: 'Working through a generative AI course, alongside the final year project.',
+  topics: [
+    'LLM APIs & prompt engineering',
+    'Vector databases & RAG pipelines',
+    'LangChain & Langflow integration',
+    'Model fine-tuning concepts',
+    'Streamlit & Gradio UI deployment',
+    'Agentic AI & multi-step automation',
+  ],
   direction:
     'Moving toward AI platform work — retrieval, orchestration and evaluation infrastructure. My model experience so far has been lower-level: fine-tuning, quantising and deploying to constrained hardware rather than integrating hosted LLM APIs.',
   course: {

@@ -7,18 +7,17 @@ Every item below is information I do not have and must not invent. Each has a
 
 | # | Item | Where | Notes |
 |---|------|-------|-------|
-| 1 | **Confirm TensorFlow on the Stack list** | `src/data/content.ts` → `stackGroups` | On the CV but in none of the audited repos. Drop it, or move it to the `familiar` line the way C++ was. This is the last unverified claim on the site. |
-| 2 | **Generative AI course — syllabus topics** | `src/data/content.ts` → `currently` | Optional. Course, provider, status and completion date are all set. The old copy named agent architectures, tool use, orchestration and evaluation — that described an *Agentic* AI course, not this one, so it was removed rather than guessed at. Supply the real topics if you want them named. |
-| 3 | **Move the course to Education on completion** | `src/components/sections/EducationSection.tsx` | Expected September 2026. Currently a visible placeholder; swap it for a real entry once done. |
+| 1 | **Rotate the Resend API key** | resend.com dashboard | The key was shared in plain text in a chat transcript. It is not in this repo and never was, but a key that has been pasted anywhere should be treated as exposed. Revoke it, issue a new one, and update `RESEND_API_KEY` in Vercel. |
+| 2 | **Move the course to Education on completion** | `src/components/sections/EducationSection.tsx` | Expected September 2026. Nothing renders for it under Education until then. |
 
 ## Assets — Phase 4
 
 | # | Item | Notes |
 |---|------|-------|
-| 5 | **`RESEND_API_KEY` in Vercel** | Needed for the form to deliver mail **server-side**. Create a free key at resend.com and add it in Project → Settings → Environment Variables. `CONTACT_TO` defaults to `abdullahkniazi04@gmail.com`, so no other variable is required. Until it is set, the form falls back to a pre-filled `mailto:` addressed to you, so messages still reach you — the visitor sends from their own email client instead. |
-| 6 | **OG image, 1200×630** | Must be a real rendered image, not a placeholder. |
-| 7 | **`robots.txt` and `sitemap.xml`** | Missing today; this is the entire reason Lighthouse SEO scores 92 rather than 100. |
-| 8 | **Resume PDF** | Only if the `/resume` route is built. |
+| 3 | **~~`RESEND_API_KEY` in Vercel~~ — done** | Needed for the form to deliver mail **server-side**. Create a free key at resend.com and add it in Project → Settings → Environment Variables. `CONTACT_TO` defaults to `abdullahkniazi04@gmail.com`, so no other variable is required. Until it is set, the form falls back to a pre-filled `mailto:` addressed to you, so messages still reach you — the visitor sends from their own email client instead. |
+| 4 | **OG image, 1200×630** | Must be a real rendered image, not a placeholder. |
+| 5 | **`robots.txt` and `sitemap.xml`** | Missing today; this is the entire reason Lighthouse SEO scores 92 rather than 100. |
+| 6 | **Resume PDF** | Only if the `/resume` route is built. |
 
 ## Resolved
 
@@ -48,3 +47,7 @@ Every item below is information I do not have and must not invent. Each has a
   and nothing is rendered under Education until it completes.
 - ~~Case study bundle weight~~ — prose split into per-route modules; first-load JS
   back to 128.3 KB gzipped.
+- ~~TensorFlow~~ — moved to the AI/ML "Familiar with" line, same as C++.
+- ~~Course outline~~ — six topics supplied and rendered in the Currently band.
+- ~~Contact delivery~~ — `RESEND_API_KEY` is set in Vercel and the live endpoint
+  returned 202 on a real send. The form delivers.
