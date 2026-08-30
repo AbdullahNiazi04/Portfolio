@@ -75,7 +75,7 @@ export const featured: Project[] = [
     role: 'Full-Stack Developer — Nizron International Technologies',
     period: 'Jan 2026 – Aug 2026',
     status: 'deployed',
-    statusNote: 'Railway, real production data, low volume, pre-hardening',
+    statusNote: 'Running on Railway against real production data',
     accent: 'blue',
     oneLiner:
       'A multi-module ERP covering procurement, batch-tracked inventory, GMP manufacturing records, order-to-cash, HR and field-sales for a pharmaceutical manufacturer in Pakistan.',
@@ -94,7 +94,7 @@ export const featured: Project[] = [
     role: 'Final Year Project — Institute of Space Technology',
     period: '2025 – 2026',
     status: 'prototype',
-    statusNote: 'Demonstrated end-to-end, not a deployed product',
+    statusNote: 'Working prototype, demonstrated end-to-end across three machines',
     accent: 'pink',
     oneLiner:
       'Three physical machines train a shared hate-speech classifier without any raw text ever leaving a device — including an NVIDIA Jetson Nano with 4 GB of shared memory that had to be re-engineered to participate at all.',
@@ -112,7 +112,7 @@ export const featured: Project[] = [
     role: 'Freelance Full-Stack Developer',
     period: '2026',
     status: 'delivered',
-    statusNote: 'Built and delivered to the client; no longer online — the client has since closed',
+    statusNote: 'Built and delivered in full; the client has since closed the business, so it is no longer online',
     accent: 'mint',
     oneLiner:
       "A hearing-aid clinic's public site plus a purpose-built CMS, so the owner can edit every page, publish articles, manage products and track patient enquiries without touching code.",
@@ -151,7 +151,7 @@ export const alsoBuilt: MinorProject[] = [
     year: '2025',
     repoUrl: 'https://github.com/abdullahkniazi04/Rent-Karo',
     detail:
-      'A learning project following a well-known course build, so the listing taxonomy will look familiar. Included for the session-based auth, server-side validation and MVC separation, not as original product work.',
+      'Built from a well-known course project. Included for the session-based auth, server-side validation, cloud image upload and the MVC separation.',
   },
 ];
 

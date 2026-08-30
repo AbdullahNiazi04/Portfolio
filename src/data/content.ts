@@ -147,12 +147,12 @@ export const principles: Principle[] = [
     body: 'The OOM recovery handler on the Jetson halves the batch and retries instead of losing an eight-hour run. The same instinct applies to retries, timeouts and fallbacks in a backend.',
   },
   {
-    title: 'Know your own system’s weaknesses better than a reviewer does',
-    body: 'I can tell you which 310 of my 480 endpoints are unguarded, and I have written the remediation plan. That is more useful than claiming there are none.',
+    title: 'Audit your own system before someone else does',
+    body: 'I audited every endpoint in my ERP and found that authorisation had grown in controller by controller instead of applying by default. That produced a remediation design — a global default-deny guard with an explicit decorator for the routes that genuinely are public — and it changed how I start a backend.',
   },
   {
     title: 'Security belongs in the skeleton, not the hardening pass',
-    body: 'My ERP has 310 unguarded endpoints and no rate limiting, because auth was added per-controller as the system grew. The next backend I built had Helmet, throttling, a global exception filter and input sanitisation before it had a second feature module. That ordering is the difference.',
+    body: 'On my first large backend, authorisation was added controller by controller as the system grew — the wrong default. The next backend I built had Helmet, rate limiting, a global exception filter and input sanitisation in place before it had a second feature module. That ordering is the difference, and it is how I start now.',
   },
 ];
 

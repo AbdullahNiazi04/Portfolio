@@ -78,8 +78,8 @@ function Work() {
         <Reveal>
           <SectionHeading id="work-heading">Selected work</SectionHeading>
           <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-muted">
-            Three builds, each with its own case study — including what is still wrong with
-            them.
+            Three builds, each with a case study covering the architecture, the
+            trade-offs behind it and what I changed as a result.
           </p>
         </Reveal>
 
