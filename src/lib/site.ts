@@ -1,11 +1,10 @@
 /**
  * Single source of truth for identity and absolute URLs.
  *
- * TODO(abdullah): confirm the deployed Vercel subdomain. Every canonical URL,
- * the sitemap and the OG image URL derive from SITE_URL, so this is the only
- * line that needs to change once the domain is fixed.
+ * Every canonical URL, the sitemap and the OG image URL derive from SITE_URL,
+ * so a custom domain later is a one-line change here.
  */
-export const SITE_URL = 'https://abdullah-niazi.vercel.app';
+export const SITE_URL = 'https://portfolio-site-seven-murex-68.vercel.app';
 
 export const person = {
   name: 'Abdullah Khan Niazi',

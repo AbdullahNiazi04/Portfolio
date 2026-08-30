@@ -129,7 +129,7 @@ export const alsoBuilt: MinorProject[] = [
   {
     title: 'FilmCeption',
     blurb:
-      'Kotlin Android app for movie genre classification — a study in on-device ML packaging and why the model/runtime version contract matters.',
+      'Created a genre predictor and a recommendation system for a Kotlin Android movie app.',
     tech: [
       'Kotlin',
       'Android',
@@ -140,7 +140,7 @@ export const alsoBuilt: MinorProject[] = [
     ],
     year: '2025',
     detail:
-      'The fine-tuned DistilBERT never ran in the shipped build — three independent failures across filename, loader format and PyTorch version. Documented rather than hidden; the lesson was that a model is not one file.',
+      'The shipped predictor runs on keyword matching: the fine-tuned DistilBERT was packaged but never executed, blocked by filename, loader format and PyTorch version. A model is not one file.',
   },
   {
     title: 'RentKaro',
