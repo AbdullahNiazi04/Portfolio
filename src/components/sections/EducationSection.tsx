@@ -25,10 +25,11 @@ export function EducationSection() {
           ))}
         </ul>
 
-        {/* TODO(abdullah): add the Agentic AI course here once complete, with
-            provider and date. While in progress it belongs in Currently. */}
+        {/* The generative AI course moves here from Currently on completion,
+            with a date. While in progress it is learning, not a credential. */}
         <p className="label-type mt-8 border-2 border-dashed border-line px-4 py-3 text-[0.65rem] text-muted">
-          TODO — Agentic AI course listed here once completed, with provider and date
+          TODO — Generative AI (Cohort 3), Pak Angels &amp; HEC: listed here on completion,
+          with the date
         </p>
       </Reveal>
     </Section>

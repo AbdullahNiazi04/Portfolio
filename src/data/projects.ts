@@ -112,7 +112,7 @@ export const featured: Project[] = [
     role: 'Freelance Full-Stack Developer',
     period: '2026',
     status: 'delivered',
-    statusNote: 'Frontend and backend both deployed to Vercel for a real client',
+    statusNote: 'Built and delivered to the client; no longer online — the client has since closed',
     accent: 'mint',
     oneLiner:
       "A hearing-aid clinic's public site plus a purpose-built CMS, so the owner can edit every page, publish articles, manage products and track patient enquiries without touching code.",
@@ -130,17 +130,9 @@ export const alsoBuilt: MinorProject[] = [
     title: 'FilmCeption',
     blurb:
       'Created a genre predictor and a recommendation system for a Kotlin Android movie app.',
-    tech: [
-      'Kotlin',
-      'Android',
-      'PyTorch Mobile',
-      'TorchScript',
-      'Firebase Auth',
-      'Cloud Firestore',
-    ],
+    tech: ['Kotlin', 'Android', 'Firebase Auth', 'Cloud Firestore'],
+    // No repoUrl: the client holds the repository.
     year: '2025',
-    detail:
-      'The shipped predictor runs on keyword matching: the fine-tuned DistilBERT was packaged but never executed, blocked by filename, loader format and PyTorch version. A model is not one file.',
   },
   {
     title: 'RentKaro',
@@ -157,6 +149,7 @@ export const alsoBuilt: MinorProject[] = [
       'Mapbox',
     ],
     year: '2025',
+    repoUrl: 'https://github.com/abdullahkniazi04/Rent-Karo',
     detail:
       'A learning project following a well-known course build, so the listing taxonomy will look familiar. Included for the session-based auth, server-side validation and MVC separation, not as original product work.',
   },

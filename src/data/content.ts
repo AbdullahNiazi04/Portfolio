@@ -173,16 +173,22 @@ export const education = {
 /**
  * The Currently band. Deliberately not a certification badge and not in the
  * Education section: while it is in progress it is current learning, not a
- * credential.
+ * credential. It moves to Education once complete, with a date.
  *
- * TODO(abdullah): supply the course provider, exact title and status. Render as
- * `{Course Title} — {Provider} · {In progress | Completed MM YYYY}`.
+ * TODO(abdullah): if you want the syllabus named, supply the actual topics.
+ * The previous copy listed agent architectures, tool use, orchestration and
+ * evaluation — that was written for an "Agentic AI" course and does not
+ * necessarily describe this one, so it has been removed rather than guessed at.
  */
 export const currently = {
-  body: 'Working through an Agentic AI course — agent architectures, tool use and function calling, orchestration patterns, and evaluation.',
+  body: 'Working through a generative AI course, alongside the final year project.',
   direction:
     'Moving toward AI platform work — retrieval, orchestration and evaluation infrastructure. My model experience so far has been lower-level: fine-tuning, quantising and deploying to constrained hardware rather than integrating hosted LLM APIs.',
-  course: null as { title: string; provider: string; status: string } | null,
+  course: {
+    title: 'Generative AI — Cohort 3',
+    provider: 'Pak Angels & HEC',
+    status: 'In progress',
+  } as { title: string; provider: string; status: string } | null,
 };
 
 /** Replaces the reference's client-logo wall. Technologies, never company names. */
