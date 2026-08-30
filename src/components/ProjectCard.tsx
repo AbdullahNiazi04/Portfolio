@@ -34,13 +34,24 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       */}
       <div className="grid lg:grid-cols-2">
         <div
-          className={`${ACCENT_BG[project.accent]} flex h-[120px] items-start justify-end p-4 lg:h-auto lg:min-h-[380px] ${
+          className={`${ACCENT_BG[project.accent]} overflow-hidden p-3 sm:p-4 lg:p-5 lg:min-h-[340px] flex items-center justify-center ${
             reversed ? 'lg:order-2' : 'lg:order-1'
           } [background-image:repeating-linear-gradient(135deg,rgba(255,255,255,0.14)_0_10px,transparent_10px_20px)]`}
         >
-          <span className="label-type num bg-on-accent-surface px-2 py-1 text-[0.6rem] text-on-accent">
-            {project.period}
-          </span>
+          {/* product screenshot */}
+          {project.preview ? (
+            <img
+              src={`/img/shot-${project.slug}-1400.webp`}
+              srcSet={`/img/shot-${project.slug}-700.webp 700w, /img/shot-${project.slug}-1400.webp 1400w`}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              width={project.preview.width}
+              height={project.preview.height}
+              loading="lazy"
+              decoding="async"
+              alt={project.preview.alt}
+              className="block h-auto w-full rounded-sm border-[1.5px] border-ink/8 shadow-md"
+            />
+          ) : null}
         </div>
 
         <div
@@ -51,6 +62,9 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           <div className="flex flex-wrap items-center gap-2.5">
             <span className="label-type border-[1.5px] border-line-strong px-2.5 py-1 text-[0.62rem]">
               {STATUS_LABEL[project.status]}
+            </span>
+            <span className="label-type num border-[1.5px] border-line px-2 py-1 text-[0.58rem] text-muted">
+              {project.period}
             </span>
             <span className="text-[0.72rem] text-muted">{project.statusNote}</span>
           </div>

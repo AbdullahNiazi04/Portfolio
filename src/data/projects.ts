@@ -68,6 +68,13 @@ export interface Project {
   oneLiner: string;
   metrics: Metric[];
   stack: string[];
+  /**
+   * Card-level screenshot metadata. Deliberately separate from the case
+   * study's `screenshot`: that one lives in the route chunk and carries a long
+   * descriptive alt, while this ships with the home page and stays short.
+   * Dimensions are the 1400-wide variant, so the card reserves its box.
+   */
+  preview?: { width: number; height: number; alt: string };
 }
 
 /**
@@ -113,6 +120,7 @@ export const featured: Project[] = [
       'Docker',
       'Railway',
     ],
+    preview: { width: 1400, height: 617, alt: 'The Pharma ERP administrator dashboard' },
   },
   {
     slug: 'fedguard',
@@ -140,6 +148,7 @@ export const featured: Project[] = [
       'FastAPI',
       'Jetson Nano',
     ],
+    preview: { width: 1400, height: 642, alt: 'The FedGuard command centre, both nodes online' },
   },
   {
     slug: 'hearing-care',
@@ -168,6 +177,7 @@ export const featured: Project[] = [
       'Cloudinary',
       'Vercel',
     ],
+    preview: { width: 1400, height: 599, alt: 'The Hearing Care Services website' },
   },
 ];
 
