@@ -9,8 +9,7 @@ Every item below is information I do not have and must not invent. Each has a
 |---|------|-------|-------|
 | 1 | **Confirm TensorFlow on the Stack list** | `src/data/content.ts` → `stackGroups` | On the CV but in none of the audited repos. Drop it, or move it to the `familiar` line the way C++ was. This is the last unverified claim on the site. |
 | 2 | **Generative AI course — syllabus topics** | `src/data/content.ts` → `currently` | Optional. Course, provider, status and completion date are all set. The old copy named agent architectures, tool use, orchestration and evaluation — that described an *Agentic* AI course, not this one, so it was removed rather than guessed at. Supply the real topics if you want them named. |
-| 3 | **Hearing Care — client naming** | `src/data/projects.ts` | You named the client as *Hearing Care Studio*; the project is titled *Hearing Care Service*. Confirm which name should appear, and confirm you are content to name a client whose business has closed. Needed before the Phase 3 case study. |
-| 4 | **Move the course to Education on completion** | `src/components/sections/EducationSection.tsx` | Expected September 2026. Currently a visible placeholder; swap it for a real entry once done. |
+| 3 | **Move the course to Education on completion** | `src/components/sections/EducationSection.tsx` | Expected September 2026. Currently a visible placeholder; swap it for a real entry once done. |
 
 ## Assets — Phase 4
 
@@ -42,3 +41,6 @@ Every item below is information I do not have and must not invent. Each has a
   has closed, so nothing is online. The status note says so rather than claiming a
   deployment a reader cannot check.
 - ~~Portrait~~ — supplied and optimised (593 KB → 15.6 KB at 1x WebP).
+- ~~Hearing Care client name~~ — *Hearing Care Services*, used throughout.
+- ~~Known limitations framing~~ — replaced by `solved: {problem, fix}[]`. The case
+  study model has no field an open item could live in.
