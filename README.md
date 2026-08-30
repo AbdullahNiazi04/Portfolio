@@ -68,9 +68,27 @@ Manrope (body) or JetBrains Mono (numbers, tabular figures).
 
 ## Environment variables
 
-| Name | Used for | Set when |
+Set these in the Vercel dashboard (Project → Settings → Environment Variables).
+
+| Name | Required | Used for |
 |---|---|---|
-| `VITE_API_URL` | Contact form endpoint | Phase 4. Points at the Vercel serverless function initially; repointed at the NestJS service if Phase 5 is built. |
+| `RESEND_API_KEY` | **Yes, to receive messages** | API key from [resend.com](https://resend.com). Without it `/api/contact` returns 503 and the form falls back to showing the email address. |
+| `CONTACT_TO` | No | Destination address. Defaults to `abdullahkniazi04@gmail.com`. |
+| `CONTACT_FROM` | No | Verified sender. Defaults to `onboarding@resend.dev`, which works with no custom domain but only delivers to your own verified address. |
+| `VITE_API_URL` | No | Overrides the contact endpoint. Defaults to `/api/contact`. Repoint this at the NestJS service if the optional backend is built. |
+
+### Where contact form messages go
+
+`POST /api/contact` (`api/contact.ts`, Vercel Edge) validates the submission,
+checks the honeypot, applies best-effort per-IP rate limiting, then sends the
+message through Resend to `CONTACT_TO`, with the sender's address as `reply_to`
+so a reply goes straight back to them.
+
+**Until `RESEND_API_KEY` is set, no message is delivered.** The endpoint returns
+503 and the form tells the visitor to email directly — it never reports a
+success it did not achieve. The client also requires a JSON body with
+`{ ok: true }`, so an SPA rewrite serving `index.html` at 200 cannot be mistaken
+for a delivered message.
 
 ## Deploying to Vercel
 

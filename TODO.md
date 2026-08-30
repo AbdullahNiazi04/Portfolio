@@ -16,9 +16,10 @@ Every item below is information I do not have and must not invent. Each has a
 
 | # | Item | Notes |
 |---|------|-------|
-| 5 | **OG image, 1200×630** | Must be a real rendered image, not a placeholder. |
-| 6 | **`robots.txt` and `sitemap.xml`** | Missing today; this is the entire reason Lighthouse SEO scores 92 rather than 100. |
-| 7 | **Resume PDF** | Only if the `/resume` route is built. |
+| 5 | **`RESEND_API_KEY` in Vercel** | **Nothing reaches your inbox until this is set.** Create a free key at resend.com and add it in Project → Settings → Environment Variables. `CONTACT_TO` defaults to `abdullahkniazi04@gmail.com`, so no other variable is required. |
+| 6 | **OG image, 1200×630** | Must be a real rendered image, not a placeholder. |
+| 7 | **`robots.txt` and `sitemap.xml`** | Missing today; this is the entire reason Lighthouse SEO scores 92 rather than 100. |
+| 8 | **Resume PDF** | Only if the `/resume` route is built. |
 
 ## Resolved
 

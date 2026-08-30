@@ -30,6 +30,7 @@ export function ContactForm() {
   const messageId = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');
+  const [serverError, setServerError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -59,13 +60,34 @@ export function ContactForm() {
     }
 
     setStatus('submitting');
+    setServerError(null);
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        // `company` is the honeypot. The server checks it too, because a bot
+        // posting straight at the endpoint never runs this code.
+        body: JSON.stringify({ ...values, company: '' }),
       });
-      if (!res.ok) throw new Error(String(res.status));
+
+      // Require a JSON body that explicitly says ok. A rewrite serving the SPA
+      // shell would otherwise arrive as a 200 and read as a success.
+      const data: unknown = await res.json().catch(() => null);
+      const ok =
+        res.ok &&
+        typeof data === 'object' &&
+        data !== null &&
+        (data as { ok?: unknown }).ok === true;
+
+      if (!ok) {
+        const fieldErrors = (data as { errors?: Errors } | null)?.errors;
+        if (fieldErrors) setErrors(fieldErrors);
+        const msg = (data as { error?: string } | null)?.error;
+        if (msg) setServerError(msg);
+        setStatus('error');
+        return;
+      }
+
       setStatus('sent');
       form.reset();
     } catch {
@@ -165,7 +187,8 @@ export function ContactForm() {
               {status === 'sent' ? 'Thanks — your message is on its way.' : null}
               {status === 'error' ? (
                 <span className="text-pink">
-                  That did not send. Email {person.email} directly and it will reach me.
+                  {serverError ? `${serverError} ` : 'That did not send. '}
+                  Email {person.email} directly and it will reach me.
                 </span>
               ) : null}
             </p>
