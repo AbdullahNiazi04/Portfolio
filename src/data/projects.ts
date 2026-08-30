@@ -47,7 +47,8 @@ export interface Project {
   oneLiner: string;
   metrics: Metric[];
   stack: string[];
-  caseStudy: CaseStudy;
+  /** Written in Phase 3. The detail page renders a stub until it exists. */
+  caseStudy?: CaseStudy;
 }
 
 /**
@@ -66,8 +67,63 @@ export interface MinorProject {
   detail?: string;
 }
 
-/** Populated in Phase 2 from the verified content in the brief. */
-export const featured: Project[] = [];
+export const featured: Project[] = [
+  {
+    slug: 'pharma-erp',
+    title: 'PharmaERP',
+    subtitle: 'Pharmaceutical manufacturing & distribution ERP',
+    role: 'Full-Stack Developer — Nizron International Technologies',
+    period: 'Jan 2026 – Aug 2026',
+    status: 'deployed',
+    statusNote: 'Railway, real production data, low volume, pre-hardening',
+    accent: 'blue',
+    oneLiner:
+      'A multi-module ERP covering procurement, batch-tracked inventory, GMP manufacturing records, order-to-cash, HR and field-sales for a pharmaceutical manufacturer in Pakistan.',
+    metrics: [
+      { label: 'HTTP endpoints', value: '480' },
+      { label: 'Prisma models', value: '109', note: '54 enums' },
+      { label: 'Application code', value: '~88k', note: 'lines across ~625 files' },
+    ],
+    stack: ['NestJS 11', 'Fastify', 'Prisma 6', 'PostgreSQL', 'Socket.IO', 'React 19', 'Docker', 'Railway'],
+  },
+  {
+    slug: 'fedguard',
+    title: 'FedGuard',
+    subtitle:
+      'Real-time spoken hate-speech detection via federated learning on heterogeneous edge hardware',
+    role: 'Final Year Project — Institute of Space Technology',
+    period: '2025 – 2026',
+    status: 'prototype',
+    statusNote: 'Demonstrated end-to-end, not a deployed product',
+    accent: 'pink',
+    oneLiner:
+      'Three physical machines train a shared hate-speech classifier without any raw text ever leaving a device — including an NVIDIA Jetson Nano with 4 GB of shared memory that had to be re-engineered to participate at all.',
+    metrics: [
+      { label: 'Final accuracy', value: '87.11%', note: 'threshold 0.50, 36,308-row holdout' },
+      { label: 'Federated rounds', value: '30' },
+      { label: 'Training rows', value: '726,119', note: 'across three devices' },
+    ],
+    stack: ['Python', 'PyTorch', 'Flower (FedAvg)', 'sentence-transformers', 'Whisper', 'FastAPI', 'Jetson Nano'],
+  },
+  {
+    slug: 'hearing-care',
+    title: 'Hearing Care Service',
+    subtitle: 'Clinic website with a custom headless CMS',
+    role: 'Freelance Full-Stack Developer',
+    period: '2026',
+    status: 'delivered',
+    statusNote: 'Frontend and backend both deployed to Vercel for a real client',
+    accent: 'mint',
+    oneLiner:
+      "A hearing-aid clinic's public site plus a purpose-built CMS, so the owner can edit every page, publish articles, manage products and track patient enquiries without touching code.",
+    metrics: [
+      { label: 'Backend modules', value: '10', note: '12 tables, 9 migrations' },
+      { label: 'CMS pages', value: '10', note: 'plus 7 public, 4 admin' },
+      { label: 'Typed API clients', value: '8' },
+    ],
+    stack: ['NestJS 11', 'Drizzle ORM', 'PostgreSQL', 'Next.js 16', 'TipTap', 'Leaflet', 'Cloudinary', 'Vercel'],
+  },
+];
 
 export const alsoBuilt: MinorProject[] = [
   {

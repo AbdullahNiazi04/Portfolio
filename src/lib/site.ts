@@ -13,8 +13,11 @@ export const person = {
   location: 'Islamabad, Pakistan',
   email: 'abdullahkniazi04@gmail.com',
   phone: '+92 345 1860840',
-  // TODO(abdullah): supply GitHub and LinkedIn URLs.
-  github: null as string | null,
+  // Derived from the portfolio repo URL you supplied
+  // (github.com/AbdullahNiazi04/Portfolio).
+  github: 'https://github.com/AbdullahNiazi04' as string | null,
+  // TODO(abdullah): supply the LinkedIn profile URL. Rendered only when set —
+  // a null here means the link is omitted, never pointed at '#'.
   linkedin: null as string | null,
 } as const;
 

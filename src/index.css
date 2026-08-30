@@ -45,6 +45,10 @@
 
   /* Ink is the only text colour permitted on an accent block. */
   --on-accent: #16140f;
+  /* A chip sitting ON an accent block must not follow the theme: the accent
+     block itself does not flip, so a theme-flipping surface would put dark ink
+     on a dark chip. Deliberately never overridden in the dark blocks below. */
+  --on-accent-surface: rgba(255, 255, 255, 0.92);
   --focus-ring: #e9436b;
 
   /* Dark values live here as a single source of truth, then get assigned
@@ -111,6 +115,7 @@
   --color-line-strong: var(--line-strong);
   --color-muted: var(--muted);
   --color-on-accent: var(--on-accent);
+  --color-on-accent-surface: var(--on-accent-surface);
 
   --font-pixel: 'Silkscreen', ui-monospace, 'Courier New', monospace;
   --font-label: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
