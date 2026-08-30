@@ -201,8 +201,21 @@ export function ContactForm() {
                 </dd>
               </div>
             ) : null}
-            {/* LinkedIn is omitted entirely while the URL is unknown — never a
-                dead link. See TODO.md. */}
+            {person.linkedin ? (
+              <div>
+                <dt className="label-type text-[0.6rem] text-muted">LinkedIn</dt>
+                <dd className="mt-1">
+                  <a
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[0.95rem] underline underline-offset-4"
+                  >
+                    abdullahniazi1
+                  </a>
+                </dd>
+              </div>
+            ) : null}
           </dl>
         </Reveal>
       </div>

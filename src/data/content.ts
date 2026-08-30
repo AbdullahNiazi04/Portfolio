@@ -47,14 +47,18 @@ export const roles: Role[] = [
 export interface StackGroup {
   name: string;
   items: string[];
+  /**
+   * Things used in coursework rather than in shipped work. Kept visibly
+   * separate so the main list stays a claim about production experience.
+   */
+  familiar?: string[];
 }
 
 export const stackGroups: StackGroup[] = [
   {
     name: 'Languages',
-    // TODO(abdullah): confirm C++ — it is on the CV but in none of the audited
-    // repos. Drop it, or move it to a "familiar with" line.
-    items: ['TypeScript', 'JavaScript', 'Python', 'Kotlin', 'C++', 'SQL'],
+    items: ['TypeScript', 'JavaScript', 'Python', 'Kotlin', 'SQL'],
+    familiar: ['C++ — university coursework (OOP, data structures & algorithms)'],
   },
   {
     name: 'Backend',
@@ -91,7 +95,8 @@ export const stackGroups: StackGroup[] = [
   },
   {
     name: 'AI / ML',
-    // TODO(abdullah): confirm TensorFlow — same question as C++ above.
+    // TODO(abdullah): confirm TensorFlow — it is on the CV but appears in none
+    // of the audited repos. Drop it, or move it to `familiar` like C++.
     items: [
       'PyTorch',
       'scikit-learn',
@@ -185,9 +190,10 @@ export const currently = {
   direction:
     'Moving toward AI platform work — retrieval, orchestration and evaluation infrastructure. My model experience so far has been lower-level: fine-tuning, quantising and deploying to constrained hardware rather than integrating hosted LLM APIs.',
   course: {
-    title: 'Generative AI — Cohort 3',
+    title: 'Generative AI, Cohort 3',
     provider: 'Pak Angels & HEC',
-    status: 'In progress',
+    // Still in progress today, so it stays in Currently rather than Education.
+    status: 'In progress, completing September 2026',
   } as { title: string; provider: string; status: string } | null,
 };
 

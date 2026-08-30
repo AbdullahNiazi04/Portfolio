@@ -28,8 +28,8 @@ export function EducationSection() {
         {/* The generative AI course moves here from Currently on completion,
             with a date. While in progress it is learning, not a credential. */}
         <p className="label-type mt-8 border-2 border-dashed border-line px-4 py-3 text-[0.65rem] text-muted">
-          TODO — Generative AI (Cohort 3), Pak Angels &amp; HEC: listed here on completion,
-          with the date
+          TODO — Generative AI, Cohort 3 (Pak Angels &amp; HEC): moves here once completed,
+          expected September 2026
         </p>
       </Reveal>
     </Section>

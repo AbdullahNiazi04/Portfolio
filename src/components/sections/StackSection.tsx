@@ -25,7 +25,15 @@ export function StackSection() {
               />
               <h3 className="label-type text-[0.8rem] font-bold">{group.name}</h3>
             </div>
-            <p className="text-[0.95rem] leading-[1.9]">{group.items.join(' · ')}</p>
+            <div>
+              <p className="text-[0.95rem] leading-[1.9]">{group.items.join(' · ')}</p>
+              {group.familiar ? (
+                <p className="mt-2 text-[0.85rem] leading-relaxed text-muted">
+                  <span className="label-type text-[0.6rem]">Familiar with</span>{' '}
+                  {group.familiar.join(' · ')}
+                </p>
+              ) : null}
+            </div>
           </RevealItem>
         ))}
       </RevealList>

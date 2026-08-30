@@ -15,9 +15,7 @@ export const person = {
   // Derived from the portfolio repo URL you supplied
   // (github.com/AbdullahNiazi04/Portfolio).
   github: 'https://github.com/AbdullahNiazi04' as string | null,
-  // TODO(abdullah): supply the LinkedIn profile URL. Rendered only when set —
-  // a null here means the link is omitted, never pointed at '#'.
-  linkedin: null as string | null,
+  linkedin: 'https://www.linkedin.com/in/abdullahniazi1/' as string | null,
 } as const;
 
 /**
