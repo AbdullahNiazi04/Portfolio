@@ -31,8 +31,21 @@ export interface Solved {
   fix: string;
 }
 
+/**
+ * A screenshot of the running product. Served from
+ * /img/shot-<project slug>-{700,1400}.webp; width and height are the intrinsic
+ * dimensions of the 1400 variant so the box is reserved before it loads.
+ */
+export interface Screenshot {
+  width: number;
+  height: number;
+  alt: string;
+  caption: string;
+}
+
 export interface CaseStudy {
   problem: string;
+  screenshot?: Screenshot;
   architecture: string;
   decisions: Decision[];
   /** The headline debugging story. Not every project has one worth telling. */
@@ -76,7 +89,7 @@ export interface MinorProject {
 export const featured: Project[] = [
   {
     slug: 'pharma-erp',
-    title: 'PharmaERP',
+    title: 'Pharma ERP',
     subtitle: 'Pharmaceutical manufacturing & distribution ERP',
     role: 'Full-Stack Developer — Nizron International Technologies',
     period: 'Jan 2026 – Aug 2026',

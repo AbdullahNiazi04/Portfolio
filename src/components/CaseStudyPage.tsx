@@ -133,6 +133,28 @@ export function CaseStudyPage({
             </ul>
           </header>
 
+          {/* ---------------- screenshot ---------------- */}
+          {caseStudy.screenshot ? (
+            <Reveal>
+              <figure className="border-[2.5px] border-ink bg-paper-deep p-3 sm:p-4">
+                <img
+                  src={`/img/shot-${project.slug}-1400.webp`}
+                  srcSet={`/img/shot-${project.slug}-700.webp 700w, /img/shot-${project.slug}-1400.webp 1400w`}
+                  sizes="(min-width: 1024px) 1000px, 100vw"
+                  width={caseStudy.screenshot.width}
+                  height={caseStudy.screenshot.height}
+                  loading="lazy"
+                  decoding="async"
+                  alt={caseStudy.screenshot.alt}
+                  className="block h-auto w-full border-2 border-line-strong"
+                />
+                <figcaption className="mt-4 border-t-2 border-dashed border-line pt-4 text-[0.85rem] leading-relaxed text-muted">
+                  {caseStudy.screenshot.caption}
+                </figcaption>
+              </figure>
+            </Reveal>
+          ) : null}
+
           {/* ---------------- the problem ---------------- */}
           <Block id="cs-problem" heading="The problem">
             <Reveal>

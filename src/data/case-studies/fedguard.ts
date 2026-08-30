@@ -3,6 +3,12 @@ import type { CaseStudy } from '../projects';
 const caseStudy: CaseStudy = {
   problem:
     'Detecting spoken hate speech usually means shipping audio to a server. That is exactly the data you should not be centralising. Federated learning removes the need — each device trains locally and only model updates travel — but it assumes the participating hardware can actually train. One of the three nodes was an NVIDIA Jetson Nano with 4 GB of memory shared between CPU and GPU, on CUDA 10.2 and Python 3.8. Making it a genuine participant, rather than a device that merely receives the finished model, was the whole engineering problem.',
+  screenshot: {
+    width: 1400,
+    height: 642,
+    alt: 'The FedGuard command centre in dark mode. Cards show hate flags, devices online, live listener count, model accuracy and model F1. Below, a bar chart breaks flags down by device between the client laptop and the Jetson Nano, alongside a live hate-flag feed listing each detection with its device, timestamp and confidence.',
+    caption: 'The command centre during a live session, with both nodes online. Flags are attributed per device, so the laptop and the Jetson are visible as separate participants rather than one aggregate.',
+  },
   architecture:
     'Flower running FedAvg across three physical machines. The dataset of 726,119 labelled rows is split stratified with seed 42: 70% to the laptop client (508,282 rows), 25% to the Jetson Nano (181,529), and a 5% server holdout (36,308) that is only ever evaluated against, never trained on. An all-MiniLM sentence encoder is frozen and its 384-dimension L2-normalised embeddings are precomputed to disk before training begins, so the training loop only ever touches a 361,602-parameter classifier head. The live path runs Silero VAD for speech detection into Whisper tiny.en on CUDA, behind FastAPI with a WebSocket for streaming results.',
   decisions: [

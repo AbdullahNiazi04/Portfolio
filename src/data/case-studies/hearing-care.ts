@@ -3,6 +3,12 @@ import type { CaseStudy } from '../projects';
 const caseStudy: CaseStudy = {
   problem:
     'A hearing-aid clinic needed a public website, and more importantly needed to stop needing a developer. Every page, article, product, FAQ and clinic location had to be editable by the owner, and patient enquiries had to arrive somewhere they would actually be seen. A page-builder would have solved the website and not the second half.',
+  screenshot: {
+    width: 1400,
+    height: 599,
+    alt: 'The Hearing Care Services website, services page. A top navigation bar spans home, services, hearing aids, resources, about us and contact, with a book appointment call to action. The page headline reads Comprehensive Hearing Care Services above a description and a row of headline figures.',
+    caption: 'The public site. Every element here — navigation, headline, body copy and the figures below it — is editable by the owner through the CMS rather than in code.',
+  },
   architecture:
     'Two deployments on Vercel. The backend is NestJS 11 on the Express adapter with Drizzle ORM over PostgreSQL, running as a serverless function: 10 feature modules — about-page, articles, auth, FAQs, homepage-content, leads, products, services, settings and upload — across 12 tables and 9 migrations. The frontend is Next.js 16 App Router: 7 public pages, 10 CMS pages and 4 admin pages, talking to the API through 8 typed service modules. Cross-cutting concerns are global rather than per-route: an exception filter, a response transform interceptor, an admin route guard and input sanitisation middleware.',
   decisions: [

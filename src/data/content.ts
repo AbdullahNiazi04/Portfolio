@@ -155,9 +155,9 @@ export const principles: Principle[] = [
 ];
 
 export const about = [
-  'I’m a computer science student at the Institute of Space Technology in Islamabad, graduating in July 2026.',
-  'Most of what I’ve built has the same shape: software that has to work inside a constraint someone else set. A pharmaceutical factory’s actual approval workflow, not a tidy version of it. A Jetson Nano with 4 GB of shared memory that has to train a model anyway. A phone that has to run inference with no server behind it.',
-  'Right now I’m building a production ERP for a manufacturer in Pakistan and finishing a federated learning final year project. I’m looking for backend or AI platform work — the layer where models meet systems that have to stay up.',
+  'I’m a computer science graduate of the Institute of Space Technology in Islamabad, and I build backend systems that carry real operational load.',
+  'I designed and built a pharmaceutical ERP that runs a manufacturer’s procurement, batch-tracked inventory, GMP manufacturing records and order-to-cash — 480 endpoints and 109 data models, in production against real data. For my final year project I built a federated learning system that trains a shared hate-speech classifier across three machines, and re-engineered the training pipeline so an NVIDIA Jetson Nano with 4 GB of shared memory trained as a full participant rather than only receiving the finished model.',
+  'I’m looking for backend or AI platform work — the layer where models meet systems that have to stay up.',
 ];
 
 export const education = {
@@ -181,7 +181,7 @@ export const education = {
  * The topic list is the course's own outline, supplied verbatim.
  */
 export const currently = {
-  body: 'Working through a generative AI course, alongside the final year project.',
+  body: 'Working through a generative AI course, now that the federated learning project is finished.',
   topics: [
     'LLM APIs & prompt engineering',
     'Vector databases & RAG pipelines',

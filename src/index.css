@@ -105,7 +105,10 @@
   --d-ink: #f4f1e8;
   --d-blue: #3fb4d1;
   --d-yellow: #d9a338;
-  --d-pink: #de4666;
+  /* Slightly lighter than a straight 10% desaturation of --pink: ink text on
+     a pink badge measured 4.53:1 at the darker value, which clears AA with
+     almost no headroom. This lifts it to about 5.0:1. */
+  --d-pink: #e4536f;
   --d-mint: #3ac48f;
   --d-line: rgba(244, 241, 232, 0.2);
   --d-line-strong: rgba(244, 241, 232, 0.88);

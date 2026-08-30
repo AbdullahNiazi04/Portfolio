@@ -40,7 +40,7 @@ export function AboutSection() {
               <dd className="mt-1 text-[0.95rem]">{person.location}</dd>
             </div>
             <div>
-              <dt className="label-type text-[0.6rem] text-muted">Graduating</dt>
+              <dt className="label-type text-[0.6rem] text-muted">Graduated</dt>
               <dd className="num mt-1 text-[0.95rem]">July 2026</dd>
             </div>
             <div>

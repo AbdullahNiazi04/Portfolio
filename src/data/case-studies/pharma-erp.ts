@@ -1,12 +1,18 @@
 import type { CaseStudy } from '../projects';
 
 /**
- * Imported only by the PharmaERP route, which is itself lazy-loaded, so this
+ * Imported only by the Pharma ERP route, which is itself lazy-loaded, so this
  * prose ships in that route's chunk rather than on the home page's first load.
  */
 const caseStudy: CaseStudy = {
   problem:
     'A pharmaceutical manufacturer was running procurement, batch-tracked inventory, GMP manufacturing records, order-to-cash, HR and field sales across paper and spreadsheets. Regulated manufacturing does not tolerate a document that can skip a step: a batch record has to prove which materials went into it, and a purchase order has to prove that what was paid for actually arrived and passed QC. The job was to turn that into one system, serving four different clients.',
+  screenshot: {
+    width: 1400,
+    height: 617,
+    alt: 'The Pharma ERP dashboard, signed in as an administrator. The sidebar spans team chat, accounts and finance, procurement, raw material and finished goods inventory, packaging, manufacturing, sales and marketing, HRM, settings, FBR digital invoicing and admin access. The main panel shows total revenue, purchase orders, pending requisitions and pending shipments, a recent purchase order table with approval statuses, and low stock alerts.',
+    caption: 'The administrator dashboard. The sidebar is the module list — procurement, inventory, packaging, manufacturing, sales, HRM and FBR digital invoicing are each their own feature module behind the same API.',
+  },
   architecture:
     'A modular monolith. NestJS 11 on the Fastify adapter, Prisma 6 over PostgreSQL, 57 feature modules behind a single deployable unit. One API serves four clients — a React SPA, an Expo mobile app, the public site and a separate marketing portal with its own JWT auth. Socket.IO carries chat presence and notification fan-out, Cloudflare R2 holds media behind a draft re-parenting pipeline, and @nestjs/schedule runs the recurring jobs. Every document type moves through explicit, validated status transitions rather than boolean flags.',
   decisions: [
