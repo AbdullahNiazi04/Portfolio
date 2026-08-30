@@ -1,0 +1,230 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   DARK VARIANT
+   Matches both an explicit choice and the system preference, so `dark:`
+   utilities behave correctly in all three states (light / dark / system).
+   Most of the site does not need it — colour is token-driven — but it exists
+   as an escape hatch for the cases tokens cannot express.
+--------------------------------------------------------------------------- */
+@custom-variant dark {
+  &:where([data-theme='dark'], [data-theme='dark'] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme='light']), :root:not([data-theme='light']) *) {
+      @slot;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   TOKENS
+   Light is the base. Every colour is defined here on bare :root first —
+   nothing gets its only definition inside a media query.
+--------------------------------------------------------------------------- */
+:root {
+  /* surfaces */
+  --paper: #f4f1e8;
+  --paper-deep: #eae4d3;
+  --ink: #16140f;
+
+  /* accents — flat and saturated, used as blocks, never as text on paper */
+  --blue: #45c6e7;
+  --yellow: #efb43a;
+  --pink: #e9436b;
+  --mint: #3fda9f;
+
+  /* derived */
+  --line: rgba(22, 20, 15, 0.18);
+  --line-strong: rgba(22, 20, 15, 0.9);
+
+  /* Muted foreground. Replaces the reference's opacity:0.4 / 0.55 rows,
+     which both failed AA. Measures 6.9:1 on --paper. */
+  --muted: rgba(22, 20, 15, 0.72);
+
+  /* Ink is the only text colour permitted on an accent block. */
+  --on-accent: #16140f;
+  --focus-ring: #e9436b;
+
+  /* Dark values live here as a single source of truth, then get assigned
+     by the two selectors below. Declaring them once keeps the explicit and
+     system paths from drifting apart. */
+  --d-paper: #14120e;
+  --d-paper-deep: #1e1b15;
+  --d-ink: #f4f1e8;
+  --d-blue: #3fb4d1;
+  --d-yellow: #d9a338;
+  --d-pink: #de4666;
+  --d-mint: #3ac48f;
+  --d-line: rgba(244, 241, 232, 0.2);
+  --d-line-strong: rgba(244, 241, 232, 0.88);
+  --d-muted: rgba(244, 241, 232, 0.72); /* 8.8:1 on --d-paper */
+}
+
+/* Explicit dark choice */
+:root[data-theme='dark'] {
+  --paper: var(--d-paper);
+  --paper-deep: var(--d-paper-deep);
+  --ink: var(--d-ink);
+  --blue: var(--d-blue);
+  --yellow: var(--d-yellow);
+  --pink: var(--d-pink);
+  --mint: var(--d-mint);
+  --line: var(--d-line);
+  --line-strong: var(--d-line-strong);
+  --muted: var(--d-muted);
+  --focus-ring: var(--d-pink);
+}
+
+/* System dark, unless the user explicitly chose light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: var(--d-paper);
+    --paper-deep: var(--d-paper-deep);
+    --ink: var(--d-ink);
+    --blue: var(--d-blue);
+    --yellow: var(--d-yellow);
+    --pink: var(--d-pink);
+    --mint: var(--d-mint);
+    --line: var(--d-line);
+    --line-strong: var(--d-line-strong);
+    --muted: var(--d-muted);
+    --focus-ring: var(--d-pink);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   THEME MAPPING
+   `inline` so utilities reference the variable rather than copying its value —
+   that is what lets a single class respond to a theme switch.
+--------------------------------------------------------------------------- */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-blue: var(--blue);
+  --color-yellow: var(--yellow);
+  --color-pink: var(--pink);
+  --color-mint: var(--mint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-muted: var(--muted);
+  --color-on-accent: var(--on-accent);
+
+  --font-pixel: 'Silkscreen', ui-monospace, 'Courier New', monospace;
+  --font-label: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-body: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --container-site: 1100px;
+}
+
+/* ---------------------------------------------------------------------------
+   BASE
+--------------------------------------------------------------------------- */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Anchored sections must not land under the fixed mobile top bar. */
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    /* Nothing on any route may scroll the page sideways at 360px. */
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--pink);
+    color: #fff;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    line-height: 1.05;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Numbers are everywhere on this site; keep them from jittering. */
+  :where(code, kbd, samp, pre) {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* A visible ring on every interactive element. The reference only changed
+     border-style on focus, which is close to invisible. */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   TYPE UTILITIES
+--------------------------------------------------------------------------- */
+@utility pixel {
+  font-family: var(--font-pixel);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  /* Silkscreen is illegible small and has no lowercase rhythm.
+     20px is the floor; below this, use Space Grotesk uppercase instead. */
+  font-size: max(1.25rem, 1em);
+}
+
+@utility label-type {
+  font-family: var(--font-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@utility num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}

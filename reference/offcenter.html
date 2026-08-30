@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Off Center — Brand Design Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --paper: #F4F1E8;
+    --paper-deep: #EAE4D3;
+    --ink: #16140F;
+    --blue: #45C6E7;
+    --yellow: #EFB43A;
+    --pink: #E9436B;
+    --mint: #3FDA9F;
+    --line: rgba(22,20,15,0.18);
+    --line-strong: rgba(22,20,15,0.9);
+
+    --pixel: 'Silkscreen', monospace;
+    --label: 'Space Grotesk', sans-serif;
+    --body: 'Manrope', sans-serif;
+    --hand: 'Caveat', cursive;
+
+    --nav-w: 240px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--pink); color:#fff; }
+  a{ color:inherit; text-decoration:none; }
+  img, svg{ display:block; max-width:100%; }
+  p{ margin:0; }
+
+  h1,h2,h3{ margin:0; line-height:1.05; }
+
+  .pixel{
+    font-family:var(--pixel);
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+  }
+
+  .hand{
+    font-family:var(--hand);
+    font-size:1.4rem;
+    color:var(--ink);
+    opacity:0.65;
+    transform:rotate(-2deg);
+    display:inline-block;
+  }
+
+  .rule{ height:1px; background:var(--line); border:none; margin:0; }
+
+  .wavy{
+    width:100%;
+    height:40px;
+    display:block;
+  }
+  .wavy path{ fill:none; stroke:var(--line-strong); stroke-width:2; }
+
+  /* ---------- selection marquee (signature: one handle sits off its corner) ---------- */
+  .marquee{
+    position:relative;
+    display:inline-block;
+    border:2px dashed var(--line-strong);
+    padding:0.6rem 1.4rem;
+  }
+  .marquee .handle{
+    position:absolute;
+    width:9px; height:9px;
+    background:var(--ink);
+  }
+  .handle.tl{ top:-5px; left:-5px; }
+  .handle.tr{ top:-5px; right:-5px; }
+  .handle.bl{ bottom:-5px; left:-5px; }
+  .handle.br{ bottom:-5px; right:-5px; transform:translate(7px,7px); background:var(--pink); }
+
+  /* ---------- bullseye mark ---------- */
+  .mark circle:nth-child(1){ fill:none; stroke:var(--ink); stroke-width:1.8; }
+  .mark circle:nth-child(2){ fill:none; stroke:var(--ink); stroke-width:1.8; }
+  .mark circle:nth-child(3){ fill:var(--pink); }
+
+  /* ---------- flag tag ---------- */
+  .flag{
+    display:inline-block;
+    padding:0.5rem 1.2rem 0.5rem 0.9rem;
+    font-family:var(--label);
+    font-weight:700;
+    font-size:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--ink);
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    border:1.5px solid var(--line-strong);
+  }
+
+  /* ---------- pill status ---------- */
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    border:1.5px solid var(--line-strong);
+    border-radius:99px;
+    padding:0.5rem 1rem;
+    font-family:var(--label);
+    font-weight:600;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .pill .dot{ width:8px; height:8px; border-radius:50%; background:var(--mint); }
+
+  /* ---------- tag chip (used in cards) ---------- */
+  .chip{
+    font-family:var(--label);
+    font-weight:600;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    border:1.5px solid currentColor;
+    padding:0.3rem 0.7rem;
+    display:inline-block;
+  }
+
+  /* =================== NAV =================== */
+  .site-nav{
+    position:fixed;
+    top:0; left:0;
+    width:var(--nav-w);
+    height:100vh;
+    border-right:2px dashed var(--line-strong);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:1.8rem 1.5rem 1.6rem;
+    z-index:100;
+    background:var(--paper);
+  }
+
+  .nav-top{ display:flex; flex-direction:column; gap:1.4rem; }
+
+  .nav-logo{ display:flex; align-items:center; gap:0.55rem; }
+  .nav-logo span{ font-size:0.92rem; }
+
+  .nav-clock{
+    font-family:var(--label);
+    font-size:0.65rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.5;
+  }
+
+  .nav-links{
+    display:flex;
+    flex-direction:column;
+    gap:0.4rem;
+    margin-top:2.6rem;
+  }
+  .nav-links a{
+    font-family:var(--label);
+    font-weight:600;
+    font-size:0.82rem;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    padding:0.55rem 0.6rem;
+    border-left:3px solid transparent;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .nav-links a:nth-child(1):hover{ border-color:var(--blue); background:rgba(69,198,231,0.12); }
+  .nav-links a:nth-child(2):hover{ border-color:var(--yellow); background:rgba(239,180,58,0.14); }
+  .nav-links a:nth-child(3):hover{ border-color:var(--pink); background:rgba(233,67,107,0.1); }
+  .nav-links a:nth-child(4):hover{ border-color:var(--mint); background:rgba(63,218,159,0.12); }
+
+  .nav-taking{
+    margin-top:2rem;
+  }
+
+  .nav-bottom{ display:flex; flex-direction:column; gap:1rem; }
+  .nav-socials{ display:flex; gap:0.5rem; }
+  .nav-socials a{
+    border:1.5px solid var(--line-strong);
+    width:30px; height:30px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--label);
+    font-size:0.62rem;
+    font-weight:700;
+  }
+  .nav-socials a:hover{ background:var(--ink); color:var(--paper); }
+
+  .nav-credit{
+    font-family:var(--label);
+    font-size:0.65rem;
+    letter-spacing:0.02em;
+    opacity:0.5;
+  }
+
+  /* =================== MAIN =================== */
+  main{ margin-left:var(--nav-w); min-height:100vh; }
+  .wrap{ max-width:960px; margin-left:5.5vw; margin-right:auto; padding:0 1.6rem; }
+  section{ position:relative; }
+
+  /* ---------------- HERO ---------------- */
+  .hero{ padding:6rem 0 4.5rem; overflow:visible; }
+
+  .hero-flags{ display:flex; gap:1rem; margin-bottom:2rem; }
+  .hero-flags .flag:nth-child(1){ background:var(--yellow); transform:rotate(-3deg); }
+  .hero-flags .flag:nth-child(2){ background:var(--pink); color:#fff; transform:rotate(2deg); }
+
+  .hero-name{
+    font-size:clamp(2.8rem, 7vw, 5.2rem);
+    line-height:0.95;
+  }
+
+  .hero-headline{
+    font-family:var(--label);
+    font-weight:600;
+    font-size:clamp(1.5rem, 2.6vw, 2.1rem);
+    max-width:20ch;
+    margin-top:1.6rem;
+    line-height:1.35;
+  }
+  .hero-headline em{
+    font-style:normal;
+    background:var(--blue);
+    padding:0 0.3rem;
+  }
+
+  .hero-pill{ margin-top:1.6rem; }
+
+  .hero-sub{
+    font-size:clamp(1rem, 1.4vw, 1.15rem);
+    max-width:40ch;
+    margin-top:1.6rem;
+    opacity:0.75;
+    line-height:1.55;
+  }
+
+  .hero-cta{ display:flex; align-items:center; gap:1.6rem; margin-top:2.2rem; flex-wrap:wrap; }
+
+  .btn{
+    font-family:var(--label);
+    font-weight:700;
+    font-size:0.8rem;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    background:var(--ink);
+    color:var(--paper);
+    padding:1rem 1.6rem;
+    border:2px solid var(--ink);
+    display:inline-flex;
+    align-items:center;
+    gap:0.5rem;
+    transition:background .2s ease, color .2s ease;
+  }
+  .btn:hover{ background:transparent; color:var(--ink); }
+
+  .link-arrow{
+    font-family:var(--label);
+    font-weight:600;
+    font-size:0.82rem;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    border-bottom:2px solid var(--line-strong);
+    padding-bottom:2px;
+  }
+  .link-arrow:hover{ color:var(--pink); border-color:var(--pink); }
+
+  .proof{ margin-top:4.5rem; padding-top:2rem; border-top:2px dashed var(--line); }
+  .proof-label{ font-size:1.3rem; margin-bottom:1rem; }
+  .proof-row{ display:flex; flex-wrap:wrap; gap:2.2rem; font-family:var(--label); font-weight:700; font-size:1.05rem; opacity:0.4; }
+
+  /* ---------------- SECTION HEAD ---------------- */
+  .section-head{ margin-bottom:2.4rem; }
+  .section-head .hand{ display:block; margin-bottom:0.4rem; }
+  .section-head h2{ font-size:clamp(1.9rem, 4vw, 3rem); max-width:18ch; }
+
+  /* ---------------- WORK ---------------- */
+  .work{ padding:5.5rem 0 2rem; }
+
+  .project-card{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border:2.5px solid var(--ink);
+    margin-top:3.6rem;
+    min-height:420px;
+  }
+  .project-card.reverse{ direction:rtl; }
+  .project-card.reverse > *{ direction:ltr; }
+
+  .tab{
+    position:absolute;
+    top:-19px; left:50%;
+    transform:translateX(-50%);
+    background:var(--ink);
+    color:var(--paper);
+    padding:0.4rem 1.3rem 0.35rem;
+    font-family:var(--label);
+    font-weight:700;
+    font-size:0.66rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    clip-path:polygon(6% 0,94% 0,100% 100%,0 100%);
+  }
+
+  .project-content{
+    padding:2.6rem 2.2rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:1rem;
+  }
+  .project-meta{ font-family:var(--label); font-weight:600; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; opacity:0.65; }
+  .project-title{ font-size:clamp(1.7rem, 3vw, 2.3rem); }
+  .project-desc{ font-size:0.98rem; line-height:1.5; opacity:0.85; max-width:32ch; }
+  .project-link{ font-family:var(--label); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.03em; }
+  .project-tags{ display:flex; gap:0.6rem; margin-top:0.6rem; flex-wrap:wrap; }
+
+  .project-visual{
+    position:relative;
+    display:flex;
+    align-items:flex-start;
+    justify-content:flex-end;
+    padding:1rem;
+    background:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.12) 0 10px, transparent 10px 20px);
+  }
+  .project-visual span{
+    font-family:var(--label);
+    font-size:0.62rem;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    background:rgba(255,255,255,0.85);
+    color:var(--ink);
+    padding:0.3rem 0.6rem;
+  }
+
+  .bg-blue{ background:var(--blue); color:var(--ink); }
+  .bg-ink{ background:var(--ink); color:var(--paper); }
+  .bg-yellow{ background:var(--yellow); color:var(--ink); }
+
+  .bg-ink .chip{ border-color:var(--paper); }
+  .bg-blue .chip, .bg-yellow .chip{ border-color:var(--ink); }
+
+  /* ---------------- ABOUT ---------------- */
+  .about{ padding:6rem 0; }
+  .about-grid{ display:grid; grid-template-columns:0.9fr 1.4fr; gap:3rem; align-items:start; }
+  .about p{ font-size:1.05rem; line-height:1.7; opacity:0.8; }
+  .about p + p{ margin-top:1.1rem; }
+
+  /* ---------------- BENEFITS ---------------- */
+  .benefits{ padding:5rem 0; }
+  .benefit-list{ margin-top:1rem; }
+  .benefit{
+    display:grid;
+    grid-template-columns:44px 1fr;
+    gap:1.6rem;
+    padding:2rem 1.4rem;
+    border-top:2px dashed var(--line);
+  }
+  .benefit:last-child{ border-bottom:2px dashed var(--line); }
+  .benefit:nth-child(1){ border-left:4px solid var(--blue); }
+  .benefit:nth-child(2){ border-left:4px solid var(--yellow); }
+  .benefit:nth-child(3){ border-left:4px solid var(--pink); }
+  .benefit:nth-child(4){ border-left:4px solid var(--mint); }
+  .benefit:nth-child(5){ border-left:4px solid var(--blue); }
+  .benefit h3{
+    font-family:var(--label);
+    font-weight:700;
+    font-size:1.05rem;
+    text-transform:uppercase;
+  }
+  .benefit p{ margin-top:0.7rem; max-width:56ch; line-height:1.65; opacity:0.75; }
+
+  /* ---------------- EVALUATION ---------------- */
+  .evaluation{
+    background:var(--ink);
+    color:var(--paper);
+    padding:5.5rem 0;
+    margin:2rem 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .evaluation h2{ color:var(--paper); font-size:clamp(1.8rem, 3.2vw, 2.4rem); max-width:22ch; }
+  .evaluation-body{ display:grid; grid-template-columns:1.1fr 1fr; gap:3rem; margin-top:2rem; align-items:start; }
+  .evaluation p{ line-height:1.7; opacity:0.75; }
+  .evaluation p + p{ margin-top:1rem; }
+  .evaluation .btn{ background:var(--mint); border-color:var(--mint); color:var(--ink); margin-top:1.6rem; }
+  .evaluation .btn:hover{ background:transparent; color:var(--mint); }
+  .evaluation .marquee{ border-color:rgba(244,241,232,0.5); }
+  .evaluation .marquee .handle{ background:var(--paper); }
+  .evaluation .marquee .handle.br{ background:var(--pink); }
+
+  /* ---------------- SERVICES ---------------- */
+  .services{ padding:5.5rem 0; }
+  .service-list{ margin-top:1rem; }
+  .service-item{
+    display:flex; align-items:baseline; gap:0.9rem;
+    padding:1.05rem 0.4rem;
+    border-top:2px dashed var(--line);
+    font-family:var(--label);
+    font-weight:600;
+    font-size:1.2rem;
+  }
+  .service-item:last-child{ border-bottom:2px dashed var(--line); }
+  .service-sq{ width:10px; height:10px; flex-shrink:0; }
+  .service-item:nth-child(4n+1) .service-sq{ background:var(--blue); }
+  .service-item:nth-child(4n+2) .service-sq{ background:var(--yellow); }
+  .service-item:nth-child(4n+3) .service-sq{ background:var(--pink); }
+  .service-item:nth-child(4n) .service-sq{ background:var(--mint); }
+
+  /* ---------------- TESTIMONIALS ---------------- */
+  .testimonials{ padding:5.5rem 0; }
+  .test-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.6rem; margin-top:1rem; }
+  .test-card{
+    border:2px solid var(--ink);
+    padding:1.8rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.3rem;
+    background:var(--paper-deep);
+  }
+  .test-card:nth-child(1){ transform:rotate(-1deg); }
+  .test-card:nth-child(2){ transform:rotate(0.8deg); }
+  .test-card:nth-child(3){ transform:rotate(0.6deg); }
+  .test-card:nth-child(4){ transform:rotate(-0.9deg); }
+  .test-top{ display:flex; align-items:center; gap:1rem; }
+  .test-avatar{ width:50px; height:50px; border-radius:50%; border:2px solid var(--ink); flex-shrink:0; }
+  .test-card:nth-child(1) .test-avatar{ background:var(--blue); }
+  .test-card:nth-child(2) .test-avatar{ background:var(--yellow); }
+  .test-card:nth-child(3) .test-avatar{ background:var(--pink); }
+  .test-card:nth-child(4) .test-avatar{ background:var(--mint); }
+  .test-name{ font-family:var(--label); font-weight:700; font-size:0.95rem; }
+  .test-company{ font-size:0.78rem; opacity:0.55; margin-top:0.15rem; }
+  .test-quote{ font-family:var(--label); font-weight:500; font-size:1.02rem; line-height:1.5; }
+
+  /* ---------------- CONTACT ---------------- */
+  .contact{ padding:5.5rem 0; }
+  form{ margin-top:1.6rem; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+  label{
+    font-family:var(--label); font-weight:600; font-size:0.7rem;
+    letter-spacing:0.06em; text-transform:uppercase; opacity:0.55;
+    display:block; margin-bottom:0.5rem;
+  }
+  input, textarea{
+    width:100%; background:var(--paper-deep);
+    border:2px solid var(--line-strong);
+    padding:0.8rem 0.9rem;
+    font-family:var(--body); font-size:1rem; color:var(--ink);
+    margin-bottom:1.5rem;
+  }
+  input:focus, textarea:focus{ outline:none; border-color:var(--pink); border-style:dashed; }
+  textarea{ resize:vertical; min-height:100px; }
+
+  /* ---------------- FINAL CTA ---------------- */
+  .final-cta{
+    padding:6rem 0 7rem;
+    background:repeating-linear-gradient(120deg, var(--yellow) 0 46px, var(--ink) 46px 92px);
+    color:var(--paper);
+    position:relative;
+    margin-top:2rem;
+  }
+  .final-cta .inner{
+    background:var(--paper);
+    color:var(--ink);
+    border:2.5px solid var(--ink);
+    padding:3.2rem 2.6rem;
+    max-width:640px;
+  }
+  .final-cta h2{ font-size:clamp(2rem, 4.4vw, 3rem); max-width:14ch; }
+  .final-cta .hero-cta{ margin-top:2rem; }
+  .blob{ position:absolute; width:120px; opacity:0.9; }
+  .blob.b1{ top:-30px; right:8%; }
+
+  /* ---------------- FOOTER ---------------- */
+  footer{ border-top:2px dashed var(--line-strong); padding:2rem 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  .foot-row, .foot-row a{
+    font-family:var(--label); font-weight:600; font-size:0.72rem;
+    letter-spacing:0.03em; text-transform:uppercase; opacity:0.55;
+  }
+  .foot-row a:hover{ opacity:1; color:var(--pink); }
+  .foot-links{ display:flex; gap:1.4rem; }
+
+  /* =================== RESPONSIVE =================== */
+  @media (max-width: 900px){
+    .about-grid, .evaluation-body{ grid-template-columns:1fr; }
+    .test-grid{ grid-template-columns:1fr; }
+    .project-card{ grid-template-columns:1fr; }
+    .project-card.reverse{ direction:ltr; }
+    .project-visual{ min-height:220px; }
+  }
+
+  @media (max-width: 720px){
+    :root{ --nav-w: 100%; }
+    .site-nav{
+      position:fixed; height:auto; width:100%;
+      flex-direction:row; justify-content:space-between; align-items:center;
+      padding:1rem 1.2rem; border-right:none; border-bottom:2px dashed var(--line-strong);
+    }
+    .nav-top{ flex-direction:row; align-items:center; gap:0.8rem; }
+    .nav-links{ flex-direction:row; gap:0.4rem; margin-top:0; }
+    .nav-clock, .nav-taking{ display:none; }
+    .nav-bottom{ display:none; }
+    main{ margin-left:0; margin-top:60px; }
+    .wrap{ margin-left:0; padding:0 1.2rem; }
+    .form-row{ grid-template-columns:1fr; }
+    .hero-flags{ flex-wrap:wrap; }
+    .final-cta .inner{ padding:2rem 1.4rem; }
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- =================== VERTICAL NAV =================== -->
+  <nav class="site-nav">
+    <div class="nav-top">
+      <div class="nav-logo">
+        <svg class="mark" width="26" height="26" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="18"/>
+          <circle cx="20" cy="20" r="10"/>
+          <circle cx="25" cy="15" r="4"/>
+        </svg>
+        <span class="pixel">Off Center</span>
+      </div>
+      <div class="nav-clock" id="navClock">STUDIO TIME — --:--:--</div>
+
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="nav-taking">
+        <span class="pill"><span class="dot"></span>Taking new brands</span>
+      </div>
+    </div>
+
+    <div class="nav-bottom">
+      <div class="nav-socials">
+        <a href="#">IG</a>
+        <a href="#">X</a>
+        <a href="#">LI</a>
+      </div>
+      <div class="nav-credit">OFF CENTER © 2026</div>
+    </div>
+  </nav>
+
+  <!-- =================== MAIN =================== -->
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+
+        <div class="hero-flags">
+          <span class="flag" style="background:var(--yellow); transform:rotate(-3deg);">Brand Studio</span>
+          <span class="flag" style="background:var(--pink); color:#fff; transform:rotate(2deg);">Since 2026</span>
+        </div>
+
+        <div class="marquee">
+          <div class="handle tl"></div><div class="handle tr"></div>
+          <div class="handle bl"></div><div class="handle br"></div>
+          <h1 class="pixel hero-name">Off Center</h1>
+        </div>
+
+        <p class="hero-headline">We design <em>cult brands</em> that are hard to forget.</p>
+        <p class="hero-sub">Using strategy to help your business stand out — and make more money.</p>
+
+        <div class="hero-pill">
+          <span class="pill"><span class="dot"></span>Currently booking Q4 projects</span>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#contact" class="btn">Start a Brand Evaluation →</a>
+          <a href="#work" class="link-arrow">View our work</a>
+        </div>
+
+        <div class="proof">
+          <p class="hand proof-label">who's obsessing with us</p>
+          <div class="proof-row">
+            <span>North &amp; Noble</span>
+            <span>Kiln Co.</span>
+            <span>Feral</span>
+            <span>Hearth &amp; Halo</span>
+            <span>Amble</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <svg class="wavy" viewBox="0 0 1000 40" preserveAspectRatio="none"><path d="M0,20 Q50,0 100,20 T200,20 T300,20 T400,20 T500,20 T600,20 T700,20 T800,20 T900,20 T1000,20"/></svg>
+
+    <!-- WORK -->
+    <section class="work" id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="hand">explore our work!</span>
+          <h2 class="pixel">Featured Work</h2>
+        </div>
+
+        <div class="project-card bg-blue">
+          <div class="tab">Project 01</div>
+          <div class="project-content">
+            <div class="project-meta">Mar 2026 · Brand Identity</div>
+            <h3 class="project-title">North &amp; Noble</h3>
+            <p class="project-desc">When your grocery brand looks like everyone else's, nobody remembers your name.</p>
+            <a href="#" class="project-link">View Project →</a>
+            <div class="project-tags">
+              <span class="chip">Retail</span>
+              <span class="chip">Identity System</span>
+            </div>
+          </div>
+          <div class="project-visual"><span>visual.jpg</span></div>
+        </div>
+
+        <div class="project-card bg-ink reverse">
+          <div class="tab">Project 02</div>
+          <div class="project-visual"><span>visual.jpg</span></div>
+          <div class="project-content">
+            <div class="project-meta">Jan 2026 · Naming &amp; Packaging</div>
+            <h3 class="project-title">Kiln Coffee Co.</h3>
+            <p class="project-desc">From an unnamed roastery to a brand people queue for on weekends.</p>
+            <a href="#" class="project-link">View Project →</a>
+            <div class="project-tags">
+              <span class="chip">F&amp;B</span>
+              <span class="chip">Packaging</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card bg-yellow">
+          <div class="tab">Project 03</div>
+          <div class="project-content">
+            <div class="project-meta">Nov 2025 · Visual &amp; Verbal Identity</div>
+            <h3 class="project-title">Feral Studio</h3>
+            <p class="project-desc">A creative studio that needed to look as bold as the work it produces.</p>
+            <a href="#" class="project-link">View Project →</a>
+            <div class="project-tags">
+              <span class="chip">Creative</span>
+              <span class="chip">Rebrand</span>
+            </div>
+          </div>
+          <div class="project-visual"><span>visual.jpg</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+      <div class="wrap">
+        <div class="about-grid">
+          <div>
+            <span class="hand" style="display:block; margin-bottom:0.4rem;">the short version</span>
+            <h2 class="pixel" style="font-size:1.9rem;">About Us</h2>
+          </div>
+          <div>
+            <p>Businesses need to stand out with their offerings as well. We build brand equity through visual consistency, aligning values and fostering emotional connections with your target audience and increasing customer recognition.</p>
+            <p>We make YOUR offer trustable, recognizable and desirable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- BENEFITS -->
+    <section class="benefits" id="benefits">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="hand">why it's worth it</span>
+          <h2 class="pixel">Benefits</h2>
+        </div>
+
+        <div class="benefit-list">
+          <div class="benefit">
+            <svg class="mark" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="10"/><circle cx="25" cy="15" r="4"/></svg>
+            <div>
+              <h3>We figure out what you stand for</h3>
+              <p>Every cult stands for something. We figure out those values so that you resonate with the people who obsess over the same values, and clear out the rest of the noise.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <svg class="mark" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="10"/><circle cx="25" cy="15" r="4"/></svg>
+            <div>
+              <h3>We help create brand equity</h3>
+              <p>We translate your beliefs into visuals, so that your business stands out and gets recognized. This adds value to your product, and makes it more trustworthy and even more desirable.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <svg class="mark" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="10"/><circle cx="25" cy="15" r="4"/></svg>
+            <div>
+              <h3>We help you sell more</h3>
+              <p>When your brand appears different, it allows you to sell at a much higher price. Customers also buy more from brands they trust — increasing your Average Order Value (AOV).</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <svg class="mark" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="10"/><circle cx="25" cy="15" r="4"/></svg>
+            <div>
+              <h3>We help you build loyal customers</h3>
+              <p>When customers trust your brand, they keep coming back — so much that it becomes a cult. This boosts customer Lifetime Value (LTV) and retention.</p>
+            </div>
+          </div>
+          <div class="benefit">
+            <svg class="mark" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18"/><circle cx="20" cy="20" r="10"/><circle cx="25" cy="15" r="4"/></svg>
+            <div>
+              <h3>We help you lower marketing costs</h3>
+              <p>When your brand becomes more recognizable, your need to spend on marketing campaigns reduces, and your Customer Acquisition Cost (CAC) drops significantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEARD ENOUGH / EVALUATION -->
+    <section class="evaluation" id="evaluation">
+      <div class="wrap" style="margin-right:5.5vw;">
+        <span class="hand" style="color:var(--paper); opacity:0.7;">heard enough?</span>
+        <h2 class="pixel" style="margin-top:0.6rem;">Do these problems sound familiar?</h2>
+
+        <div class="evaluation-body">
+          <div>
+            <p>If the answer was yes, fill out our free Brand Evaluation form to check what your brand needs, and whether we're a good fit to work together — or not.</p>
+            <div class="marquee">
+              <div class="handle tl"></div><div class="handle tr"></div>
+              <div class="handle bl"></div><div class="handle br"></div>
+              <a href="#contact" class="btn">Fill the Brand Evaluation Form</a>
+            </div>
+          </div>
+          <div>
+            <p>We wanna ace every project we work on, so that means you might not work with us this time. However, we'll still guide you to some free assets, or toward someone who's a better fit for you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="hand">the menu</span>
+          <h2 class="pixel">Services</h2>
+        </div>
+
+        <div class="service-list">
+          <div class="service-item"><span class="service-sq"></span> Brand Audit &amp; Strategy</div>
+          <div class="service-item"><span class="service-sq"></span> Competition Analysis</div>
+          <div class="service-item"><span class="service-sq"></span> Purpose &amp; Positioning</div>
+          <div class="service-item"><span class="service-sq"></span> Naming</div>
+          <div class="service-item"><span class="service-sq"></span> Visual &amp; Verbal Identity</div>
+          <div class="service-item"><span class="service-sq"></span> Identity Systems</div>
+          <div class="service-item"><span class="service-sq"></span> Packaging Design</div>
+          <div class="service-item"><span class="service-sq"></span> No-Code Web Design</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials" id="testimonials">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="hand">don't take our word for it</span>
+          <h2 class="pixel">Testimonials</h2>
+        </div>
+
+        <div class="test-grid">
+          <div class="test-card">
+            <div class="test-top">
+              <div class="test-avatar"></div>
+              <div>
+                <div class="test-name">Maya Ferro</div>
+                <div class="test-company">Founder, Kiln Coffee Co.</div>
+              </div>
+            </div>
+            <p class="test-quote">"They didn't just design a logo — they figured out why people should care. Our repeat customers doubled."</p>
+          </div>
+          <div class="test-card">
+            <div class="test-top">
+              <div class="test-avatar"></div>
+              <div>
+                <div class="test-name">Devon Cole</div>
+                <div class="test-company">CEO, North &amp; Noble</div>
+              </div>
+            </div>
+            <p class="test-quote">"Off Center pushed back on our first instincts, and every time they were right. The brand finally feels like us."</p>
+          </div>
+          <div class="test-card">
+            <div class="test-top">
+              <div class="test-avatar"></div>
+              <div>
+                <div class="test-name">Priya Anand</div>
+                <div class="test-company">Marketing Lead, Feral</div>
+              </div>
+            </div>
+            <p class="test-quote">"We raised prices twice this year and customers didn't blink. That's what a real identity buys you."</p>
+          </div>
+          <div class="test-card">
+            <div class="test-top">
+              <div class="test-avatar"></div>
+              <div>
+                <div class="test-name">Jonah Reyes</div>
+                <div class="test-company">Owner, Hearth &amp; Halo</div>
+              </div>
+            </div>
+            <p class="test-quote">"The Brand Evaluation alone was worth it — it told us exactly what was missing before we spent a dollar."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="hand">let's talk</span>
+          <h2 class="pixel">Contact</h2>
+        </div>
+
+        <form>
+          <div class="form-row">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Your name">
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="you@company.com">
+            </div>
+          </div>
+          <label for="message">Tell us about your brand</label>
+          <textarea id="message" placeholder="What are you building, and what's not working yet?"></textarea>
+          <button type="submit" class="btn">Send Message →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+      <svg class="blob b1" viewBox="0 0 200 200"><path fill="var(--mint)" d="M52,-58C67,-49,79,-33,82,-15C85,3,79,24,66,40C53,56,33,68,11,70C-11,72,-33,64,-49,49C-65,34,-75,12,-73,-9C-71,-30,-57,-49,-40,-59C-23,-69,-4,-70,15,-68C34,-66,37,-67,52,-58Z" transform="translate(100 100)"/></svg>
+      <div class="wrap">
+        <div class="inner">
+          <span class="hand">ready when you are</span>
+          <h2 class="pixel" style="margin-top:0.6rem;">Let's Talk</h2>
+          <p style="margin-top:1rem; max-width:38ch; opacity:0.8; line-height:1.6;">Ready to become impossible to ignore? Tell us about your brand and we'll take it from there.</p>
+          <div class="hero-cta">
+            <div class="marquee">
+              <div class="handle tl"></div><div class="handle tr"></div>
+              <div class="handle bl"></div><div class="handle br"></div>
+              <a href="#contact" class="btn">Start the Brand Evaluation →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="margin-left:var(--nav-w);">
+    <div class="wrap">
+      <div class="foot-row">
+        <span>Off Center © 2026 — All rights off-kilter</span>
+        <div class="foot-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function tick(){
+      var el = document.getElementById('navClock');
+      if(!el) return;
+      var d = new Date();
+      var h = d.getHours().toString().padStart(2,'0');
+      var m = d.getMinutes().toString().padStart(2,'0');
+      var s = d.getSeconds().toString().padStart(2,'0');
+      el.textContent = 'STUDIO TIME — ' + h + ':' + m + ':' + s;
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>
