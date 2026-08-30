@@ -25,12 +25,9 @@ export function EducationSection() {
           ))}
         </ul>
 
-        {/* The generative AI course moves here from Currently on completion,
-            with a date. While in progress it is learning, not a credential. */}
-        <p className="label-type mt-8 border-2 border-dashed border-line px-4 py-3 text-[0.65rem] text-muted">
-          TODO — Generative AI, Cohort 3 (Pak Angels &amp; HEC): moves here once completed,
-          expected September 2026
-        </p>
+        {/* The generative AI course lives in the Currently band while it is in
+            progress. It becomes an entry here on completion (expected September
+            2026) — nothing is rendered for it until then. */}
       </Reveal>
     </Section>
   );

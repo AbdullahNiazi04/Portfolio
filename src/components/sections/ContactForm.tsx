@@ -13,6 +13,23 @@ interface Errors {
 
 const ENDPOINT = import.meta.env['VITE_API_URL'] ?? '/api/contact';
 
+/**
+ * Builds a pre-addressed, pre-filled mailto for the failure path, so a visitor
+ * never has to retype what they already wrote.
+ */
+function buildMailto(
+  values: { name: string; email: string; message: string } | null,
+): string {
+  if (!values) return `mailto:${person.email}`;
+  const subject = `Portfolio contact — ${values.name}`.slice(0, 160);
+  const body = `${values.message}
+
+— ${values.name} (${values.email})`;
+  return `mailto:${person.email}?subject=${encodeURIComponent(
+    subject,
+  )}&body=${encodeURIComponent(body)}`;
+}
+
 function validate(values: { name: string; email: string; message: string }): Errors {
   const errors: Errors = {};
   if (!values.name.trim()) errors.name = 'Please enter your name.';
@@ -31,6 +48,12 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');
   const [serverError, setServerError] = useState<string | null>(null);
+  // Kept so a failed send can still be handed off to the visitor's mail client.
+  const [lastValues, setLastValues] = useState<{
+    name: string;
+    email: string;
+    message: string;
+  } | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -61,6 +84,7 @@ export function ContactForm() {
 
     setStatus('submitting');
     setServerError(null);
+    setLastValues(values);
     try {
       const res = await fetch(ENDPOINT, {
         method: 'POST',
@@ -183,15 +207,39 @@ export function ContactForm() {
             </button>
 
             {/* Single live region: announced on success and on failure alike. */}
-            <p role="status" aria-live="polite" className="mt-4 text-[0.88rem]">
+            <div role="status" aria-live="polite" className="mt-4 text-[0.88rem]">
               {status === 'sent' ? 'Thanks — your message is on its way.' : null}
               {status === 'error' ? (
-                <span className="text-pink">
-                  {serverError ? `${serverError} ` : 'That did not send. '}
-                  Email {person.email} directly and it will reach me.
-                </span>
+                <>
+                  <p className="text-pink">
+                    {serverError ? `${serverError} ` : 'That did not send. '}
+                    Your message is not lost — send it straight from your own email
+                    instead.
+                  </p>
+                  {/*
+                    Hands the typed message off to the visitor's mail client,
+                    pre-addressed and pre-filled. This is what makes the form
+                    usable before the mail provider key is configured.
+                  */}
+                  <a
+                    href={buildMailto(lastValues)}
+                    className="label-type mt-3 inline-flex border-2 border-ink bg-ink px-5 py-3 text-[0.72rem] text-paper transition-colors hover:bg-transparent hover:text-ink"
+                  >
+                    Open in my email app
+                  </a>
+                  <p className="mt-3 text-[0.82rem] text-muted">
+                    Or write to{' '}
+                    <a
+                      href={`mailto:${person.email}`}
+                      className="underline underline-offset-4"
+                    >
+                      {person.email}
+                    </a>
+                    .
+                  </p>
+                </>
               ) : null}
-            </p>
+            </div>
           </form>
         </Reveal>
 

@@ -1,11 +1,10 @@
-import { CaseStudyStub } from './CaseStudyStub';
+import { CaseStudyPage } from '@/components/CaseStudyPage';
+import { featured } from '@/data/projects';
+import caseStudy from '@/data/case-studies/pharma-erp';
+
+const project = featured.find((p) => p.slug === 'pharma-erp');
 
 export default function PharmaErp() {
-  return (
-    <CaseStudyStub
-      title="PharmaERP"
-      subtitle="Pharmaceutical manufacturing & distribution ERP."
-      path="/work/pharma-erp"
-    />
-  );
+  if (!project) return null;
+  return <CaseStudyPage project={project} caseStudy={caseStudy} />;
 }

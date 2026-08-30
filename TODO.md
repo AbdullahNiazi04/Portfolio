@@ -15,7 +15,7 @@ Every item below is information I do not have and must not invent. Each has a
 
 | # | Item | Notes |
 |---|------|-------|
-| 5 | **`RESEND_API_KEY` in Vercel** | **Nothing reaches your inbox until this is set.** Create a free key at resend.com and add it in Project → Settings → Environment Variables. `CONTACT_TO` defaults to `abdullahkniazi04@gmail.com`, so no other variable is required. |
+| 5 | **`RESEND_API_KEY` in Vercel** | Needed for the form to deliver mail **server-side**. Create a free key at resend.com and add it in Project → Settings → Environment Variables. `CONTACT_TO` defaults to `abdullahkniazi04@gmail.com`, so no other variable is required. Until it is set, the form falls back to a pre-filled `mailto:` addressed to you, so messages still reach you — the visitor sends from their own email client instead. |
 | 6 | **OG image, 1200×630** | Must be a real rendered image, not a placeholder. |
 | 7 | **`robots.txt` and `sitemap.xml`** | Missing today; this is the entire reason Lighthouse SEO scores 92 rather than 100. |
 | 8 | **Resume PDF** | Only if the `/resume` route is built. |
@@ -44,3 +44,7 @@ Every item below is information I do not have and must not invent. Each has a
 - ~~Hearing Care client name~~ — *Hearing Care Services*, used throughout.
 - ~~Known limitations framing~~ — replaced by `solved: {problem, fix}[]`. The case
   study model has no field an open item could live in.
+- ~~Education course placeholder~~ — removed. The course shows in *Currently* only,
+  and nothing is rendered under Education until it completes.
+- ~~Case study bundle weight~~ — prose split into per-route modules; first-load JS
+  back to 128.3 KB gzipped.

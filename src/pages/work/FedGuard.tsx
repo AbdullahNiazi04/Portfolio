@@ -1,11 +1,10 @@
-import { CaseStudyStub } from './CaseStudyStub';
+import { CaseStudyPage } from '@/components/CaseStudyPage';
+import { featured } from '@/data/projects';
+import caseStudy from '@/data/case-studies/fedguard';
+
+const project = featured.find((p) => p.slug === 'fedguard');
 
 export default function FedGuard() {
-  return (
-    <CaseStudyStub
-      title="FedGuard"
-      subtitle="Real-time spoken hate-speech detection via federated learning on heterogeneous edge hardware."
-      path="/work/fedguard"
-    />
-  );
+  if (!project) return null;
+  return <CaseStudyPage project={project} caseStudy={caseStudy} />;
 }

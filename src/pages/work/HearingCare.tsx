@@ -1,11 +1,10 @@
-import { CaseStudyStub } from './CaseStudyStub';
+import { CaseStudyPage } from '@/components/CaseStudyPage';
+import { featured } from '@/data/projects';
+import caseStudy from '@/data/case-studies/hearing-care';
+
+const project = featured.find((p) => p.slug === 'hearing-care');
 
 export default function HearingCare() {
-  return (
-    <CaseStudyStub
-      title="Hearing Care Services"
-      subtitle="Clinic website with a custom headless CMS."
-      path="/work/hearing-care"
-    />
-  );
+  if (!project) return null;
+  return <CaseStudyPage project={project} caseStudy={caseStudy} />;
 }
