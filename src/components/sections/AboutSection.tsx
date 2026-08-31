@@ -40,8 +40,11 @@ export function AboutSection() {
               <dd className="mt-1 text-[0.95rem]">{person.location}</dd>
             </div>
             <div>
-              <dt className="label-type text-[0.6rem] text-muted">Graduated</dt>
-              <dd className="num mt-1 text-[0.95rem]">July 2026</dd>
+              {/* The degree is a fact, not a headline. It lives in Education;
+                  leading with it here made the section read as a graduate
+                  introduction rather than an engineer's. */}
+              <dt className="label-type text-[0.6rem] text-muted">Focus</dt>
+              <dd className="mt-1 text-[0.95rem]">Full-stack · AI / Edge ML</dd>
             </div>
             <div>
               <dt className="label-type text-[0.6rem] text-muted">Looking for</dt>

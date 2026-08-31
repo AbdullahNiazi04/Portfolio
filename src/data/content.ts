@@ -155,9 +155,9 @@ export const principles: Principle[] = [
 ];
 
 export const about = [
-  'I’m a computer science graduate of the Institute of Space Technology in Islamabad, and I build backend systems that carry real operational load.',
-  'I designed and built a pharmaceutical ERP that runs a manufacturer’s procurement, batch-tracked inventory, GMP manufacturing records and order-to-cash — 480 endpoints and 109 data models, in production against real data. For my final year project I built a federated learning system that trains a shared hate-speech classifier across three machines, and re-engineered the training pipeline so an NVIDIA Jetson Nano with 4 GB of shared memory trained as a full participant rather than only receiving the finished model.',
-  'I’m looking for backend or AI platform work — the layer where models meet systems that have to stay up.',
+  'I’m a full-stack developer and AI engineer. I build production backends and the interfaces on top of them, and I get models running on hardware that was never meant to run them.',
+  'I designed and built a pharmaceutical ERP that runs against real production data — 480 endpoints and 109 data models covering procurement, batch-tracked inventory, GMP manufacturing records and order-to-cash, serving four separate clients from one API. On the AI side I built a federated learning system that trains a shared hate-speech classifier across three machines, re-engineering the training pipeline so a 4 GB Jetson Nano trained as a full participant rather than only receiving the finished model.',
+  'NestJS, Prisma and Drizzle on the backend; React and Next.js on the front; PyTorch and Flower on the model side. I’m looking for backend or AI platform work.',
 ];
 
 export const education = {
