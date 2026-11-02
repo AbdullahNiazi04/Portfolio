@@ -142,7 +142,7 @@ export const featured: Project[] = [
     title: 'Pharma ERP',
     subtitle: 'Pharmaceutical manufacturing & distribution ERP',
     role: 'Full-Stack Developer — Nizron International Technologies',
-    period: 'Jan 2026 – Aug 2026',
+    period: 'Jan 2026 – Sep 2026',
     status: 'deployed',
     statusNote: 'Running on Railway against real production data',
     accent: 'blue',
@@ -170,7 +170,7 @@ export const featured: Project[] = [
     title: 'UniKe',
     subtitle: 'Backend for a mobile AI video creation and streaming app',
     role: 'Backend/AI Engineer — GoFeast',
-    period: 'Sep 2026 – Oct 2026',
+    period: 'Sep 2026 – Present',
     status: 'deployed',
     statusNote:
       'The API runs on Railway; the Flutter app reached the client as an Android test build, with no public store listing',

@@ -10,7 +10,7 @@ export function Experience() {
     <Section
       id="experience"
       heading="Experience"
-      intro="Four of these ran concurrently — an internship, a full-time build, an AI research placement and freelance work overlapping through 2025 and 2026. The GoFeast engagement followed, starting after the ERP shipped."
+      intro="These overlap rather than follow one another — an AI research internship, a full-time ERP build and freelance work ran concurrently through 2025 and 2026, and the GoFeast engagement picked up in September as the ERP build closed out."
     >
       <RevealList className="border-t-2 border-dashed border-line">
         {roles.map((role, i) => (

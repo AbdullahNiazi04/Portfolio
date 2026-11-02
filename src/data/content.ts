@@ -3,8 +3,9 @@
 export interface Role {
   org: string;
   /**
-   * Optional, because an unknown location is better left out than guessed.
-   * TODO(abdullah): GoFeast — city, or 'Remote'. Nothing in the repo records it.
+   * Optional, because an unknown location is better left out than guessed. An
+   * empty line is not a location, so Experience renders nothing when it is
+   * absent. Every current role has one.
    */
   location?: string;
   title: string;
@@ -13,26 +14,25 @@ export interface Role {
 }
 
 /**
- * Reverse-chronological by start date. The four 2025–26 roles ran concurrently
- * — confirmed, and stated in the section intro rather than left for the reader
- * to notice. Unexplained overlap reads as padding; explained overlap reads as
- * workload. GoFeast is the exception: it starts after the ERP role ends, so the
- * intro no longer claims that every role overlapped.
+ * Reverse-chronological by start date. Every role here overlaps at least one
+ * other — confirmed, and stated in the section intro rather than left for the
+ * reader to notice. Unexplained overlap reads as padding; explained overlap
+ * reads as workload. GoFeast is the only open period, so it is the one entry
+ * that has to be re-checked rather than simply kept.
  */
 export const roles: Role[] = [
   {
     org: 'GoFeast',
+    location: 'Lahore — remote',
     title: 'Backend/AI Engineer',
-    // TODO(abdullah): this is my commit range (2026-09-08 to 2026-10-27), not
-    // confirmed employment dates. Correct it, and say whether the role is open.
-    period: 'Sep 2026 – Oct 2026',
-    body: 'Built the NestJS backend and the AI video pipeline for UniKe, a client’s mobile AI video app, alongside one Flutter developer. Orchestrated Gemini and Google Veo behind a database-backed queue with its own state machine and retry policy, and reported progress directly to the client through scope changes that added a reels feed, a script feature and local video upload.',
+    period: 'Sep 2026 – Present',
+    body: 'Building the NestJS backend and the AI video pipeline for UniKe, a client’s mobile AI video app, alongside one Flutter developer. Orchestrating Gemini and Google Veo behind a database-backed queue with its own state machine and retry policy, and reporting progress directly to the client through scope changes that have added a reels feed, a script feature and local video upload.',
   },
   {
     org: 'Nizron International Technologies',
     location: 'Islamabad',
     title: 'Full Stack Developer',
-    period: 'Jan 2026 – Aug 2026',
+    period: 'Jan 2026 – Sep 2026',
     body: 'Built a pharmaceutical ERP from the ground up, digitising procurement and inventory lifecycle management. Architected scalable full-stack modules for factory operations and worked directly with stakeholders to translate complex industrial workflows into a commercial-grade product.',
   },
   {
@@ -48,13 +48,6 @@ export const roles: Role[] = [
     title: 'AI Intern',
     period: 'July 2025 – July 2026',
     body: 'Applied supervised and unsupervised learning to data-driven problems, with a focus on optimising ML models for low-latency edge deployment. Evaluated model performance and worked with researchers on bridging theoretical AI and physical hardware integration.',
-  },
-  {
-    org: 'DevFirstPro',
-    location: 'Lahore',
-    title: 'AI Engineer',
-    period: 'July 2025 – Dec 2025',
-    body: 'Built the AI layer for a Kotlin Android application, including genre classification and a movie recommendation feature, and handled packaging a fine-tuned transformer for on-device deployment.',
   },
 ];
 
@@ -181,7 +174,7 @@ export const principles: Principle[] = [
 
 export const about = [
   'I’m a full-stack developer and AI engineer. I build production backends and the interfaces on top of them, and I get models running on hardware that was never meant to run them.',
-  'I designed and built a pharmaceutical ERP that runs against real production data — 480 endpoints and 109 data models covering procurement, batch-tracked inventory, GMP manufacturing records and order-to-cash, serving four separate clients from one API. On the AI side I built a federated learning system that trains a shared hate-speech classifier across three machines, re-engineering the training pipeline so a 4 GB Jetson Nano trained as a full participant rather than only receiving the finished model. Most recently I built the backend and AI video pipeline for UniKe, where Gemini plans a film into 8-second shots, Veo renders them and ffmpeg stitches them, behind a queue that has to survive restarts without paying for the same clip twice.',
+  'I designed and built a pharmaceutical ERP that runs against real production data — 480 endpoints and 109 data models covering procurement, batch-tracked inventory, GMP manufacturing records and order-to-cash, serving four separate clients from one API. On the AI side I built a federated learning system that trains a shared hate-speech classifier across three machines, re-engineering the training pipeline so a 4 GB Jetson Nano trained as a full participant rather than only receiving the finished model. I am currently building the backend and AI video pipeline for UniKe, where Gemini plans a film into 8-second shots, Veo renders them and ffmpeg stitches them, behind a queue that has to survive restarts without paying for the same clip twice.',
   'NestJS, Prisma and Drizzle on the backend; React and Next.js on the front; PyTorch and Flower on the model side. I’m looking for backend or AI platform work.',
 ];
 
@@ -216,7 +209,7 @@ export const currently = {
     'Agentic AI & multi-step automation',
   ],
   direction:
-    'Moving toward AI platform work — retrieval, orchestration and evaluation infrastructure. The UniKe backend was the first of that in production: Gemini and Veo orchestrated behind a database-backed queue, a state machine and a retry policy, where the hard part was everything around the model call rather than the call. The rest of my model experience is lower-level — fine-tuning, quantising and deploying to constrained hardware.',
+    'Moving toward AI platform work — retrieval, orchestration and evaluation infrastructure. The UniKe backend is the first of that in production: Gemini and Veo orchestrated behind a database-backed queue, a state machine and a retry policy, where the hard part is everything around the model call rather than the call. The rest of my model experience is lower-level — fine-tuning, quantising and deploying to constrained hardware.',
   course: {
     title: 'Generative AI, Cohort 3',
     provider: 'Pak Angels & HEC',
