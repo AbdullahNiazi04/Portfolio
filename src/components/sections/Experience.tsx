@@ -10,7 +10,7 @@ export function Experience() {
     <Section
       id="experience"
       heading="Experience"
-      intro="These four roles ran concurrently — an internship, a full-time build, an AI research placement and freelance work overlapping through 2025 and 2026."
+      intro="Four of these ran concurrently — an internship, a full-time build, an AI research placement and freelance work overlapping through 2025 and 2026. The GoFeast engagement followed, starting after the ERP shipped."
     >
       <RevealList className="border-t-2 border-dashed border-line">
         {roles.map((role, i) => (
@@ -24,7 +24,10 @@ export function Experience() {
               <h3 className="label-type text-[0.95rem] font-bold">{role.title}</h3>
               <p className="mt-1.5 text-[0.88rem]">{role.org}</p>
               <p className="num mt-1 text-[0.72rem] text-muted">{role.period}</p>
-              <p className="label-type mt-0.5 text-[0.6rem] text-muted">{role.location}</p>
+              {/* Omitted rather than guessed — an empty line is not a location. */}
+              {role.location ? (
+                <p className="label-type mt-0.5 text-[0.6rem] text-muted">{role.location}</p>
+              ) : null}
             </div>
             <p className="max-w-[62ch] text-[0.92rem] leading-relaxed text-muted">
               {role.body}

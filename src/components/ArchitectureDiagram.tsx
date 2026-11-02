@@ -196,11 +196,138 @@ function HearingCareDiagram() {
   );
 }
 
+function UniKeDiagram() {
+  return (
+    <svg viewBox="0 0 700 320" className="w-full" aria-hidden="true" focusable="false">
+      <Arrow id="ar-unike" />
+
+      {/* one client, not four: there is no web or admin app */}
+      <rect x={260} y={10} width={180} height={44} className={BOX} strokeWidth="2" />
+      <text x={350} y={37} textAnchor="middle" className={LABEL} fontSize="13">
+        Flutter mobile app
+      </text>
+      <line
+        x1={350}
+        y1={54}
+        x2={350}
+        y2={104}
+        stroke="var(--line-strong)"
+        strokeWidth="1.6"
+        markerEnd="url(#ar-unike)"
+      />
+
+      <rect
+        x={140}
+        y={106}
+        width={420}
+        height={92}
+        fill="var(--yellow)"
+        stroke="var(--ink)"
+        strokeWidth="2.5"
+      />
+      <text
+        x={350}
+        y={137}
+        textAnchor="middle"
+        fontSize="15"
+        className="font-[700]"
+        fill="var(--on-accent)"
+      >
+        NestJS 11 · Fastify 5
+      </text>
+      <text x={350} y={160} textAnchor="middle" fontSize="12.5" fill="var(--on-accent)">
+        21 modules · 65 routes
+      </text>
+      <text x={350} y={182} textAnchor="middle" fontSize="12.5" fill="var(--on-accent)">
+        2 in-process workers · 25 socket events
+      </text>
+
+      {/* the three stores the API reaches, all on one row */}
+      <line
+        x1={350}
+        y1={198}
+        x2={350}
+        y2={244}
+        stroke="var(--line-strong)"
+        strokeWidth="1.6"
+        markerEnd="url(#ar-unike)"
+      />
+      <line
+        x1={225}
+        y1={198}
+        x2={120}
+        y2={244}
+        stroke="var(--line-strong)"
+        strokeWidth="1.6"
+        markerEnd="url(#ar-unike)"
+      />
+      <line
+        x1={475}
+        y1={198}
+        x2={580}
+        y2={244}
+        stroke="var(--line-strong)"
+        strokeWidth="1.6"
+        markerEnd="url(#ar-unike)"
+      />
+
+      <rect x={210} y={246} width={280} height={56} className={BOX} strokeWidth="2.5" />
+      <text x={350} y={269} textAnchor="middle" className={LABEL} fontSize="13">
+        PostgreSQL 18
+      </text>
+      <text x={350} y={289} textAnchor="middle" fontSize="11.5" fill="var(--muted)">
+        Prisma 6 · 28 models · all job state
+      </text>
+
+      <rect
+        x={20}
+        y={246}
+        width={180}
+        height={56}
+        className={BOX}
+        strokeWidth="2"
+        strokeDasharray="5 4"
+      />
+      <text x={110} y={269} textAnchor="middle" className={LABEL} fontSize="12.5">
+        Veo 3.1 · Gemini
+      </text>
+      <text x={110} y={289} textAnchor="middle" fontSize="11.5" fill="var(--muted)">
+        video · screenplay
+      </text>
+
+      <rect
+        x={500}
+        y={246}
+        width={180}
+        height={56}
+        className={BOX}
+        strokeWidth="2"
+        strokeDasharray="5 4"
+      />
+      <text x={590} y={269} textAnchor="middle" className={LABEL} fontSize="12.5">
+        R2 · Elasticsearch
+      </text>
+      <text x={590} y={289} textAnchor="middle" fontSize="11.5" fill="var(--muted)">
+        media · search
+      </text>
+    </svg>
+  );
+}
+
+/**
+ * One entry per slug. A slug with no entry renders nothing rather than an
+ * empty frame, so a case study can ship its prose before its diagram exists.
+ */
 const DIAGRAMS: Record<string, { render: () => React.JSX.Element; caption: string }> = {
   'pharma-erp': {
     render: PharmaDiagram,
     caption:
       'Four clients — a React SPA, an Expo mobile app, the public site and a marketing portal — all call one NestJS API on Fastify, carrying 57 feature modules and 480 endpoints behind a single global snake_case-to-camelCase interceptor. The API reads and writes one PostgreSQL database through Prisma across 109 models, with Cloudflare R2 holding media and Socket.IO and scheduled jobs running alongside.',
+  },
+  unike: {
+    render: UniKeDiagram,
+    caption:
+      'A Flutter app talks to one NestJS 11 API on Fastify 5, over HTTPS and Socket.IO. The API carries 21 modules, 65 HTTP endpoints and 25 socket event types, and runs two background workers in its own process. Prisma 6 connects it to PostgreSQL 18, which holds 28 models and all job state, and the workers poll it every 5 seconds. They send screenplay requests to Gemini and video jobs to Veo 3.1, then store finished media on Cloudflare R2. Elasticsearch returns search hits as ids, and the rows themselves are loaded from Postgres.',
   },
   fedguard: {
     render: FedGuardDiagram,

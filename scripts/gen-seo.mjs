@@ -15,10 +15,11 @@ if (!match) {
 }
 const SITE_URL = match[1].replace(/\/$/, '');
 
-// Keep in step with the routes in src/App.tsx.
+// Keep in step with the routes in src/App.tsx, in the same order.
 const routes = [
   { path: '/', priority: '1.0' },
   { path: '/work/pharma-erp', priority: '0.8' },
+  { path: '/work/unike', priority: '0.8' },
   { path: '/work/fedguard', priority: '0.8' },
   { path: '/work/hearing-care', priority: '0.8' },
 ];

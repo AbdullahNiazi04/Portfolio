@@ -3,6 +3,7 @@ import { Container } from './Container';
 import { Seo } from './Seo';
 import { SectionHeading } from './SectionHeading';
 import { ArchitectureDiagram } from './ArchitectureDiagram';
+import { PhoneShotGrid } from './PhoneShots';
 import { Reveal } from '@/lib/motion';
 import type { Accent, CaseStudy, Project, ProjectStatus } from '@/data/projects';
 
@@ -134,7 +135,15 @@ export function CaseStudyPage({
           </header>
 
           {/* ---------------- screenshot ---------------- */}
-          {caseStudy.screenshot ? (
+          {caseStudy.phoneShots ? (
+            <Reveal>
+              <PhoneShotGrid
+                slug={project.slug}
+                shots={caseStudy.phoneShots}
+                note={caseStudy.phoneShotsNote}
+              />
+            </Reveal>
+          ) : caseStudy.screenshot ? (
             <Reveal>
               <figure className="border-[2.5px] border-ink bg-paper-deep p-3 sm:p-4">
                 <img

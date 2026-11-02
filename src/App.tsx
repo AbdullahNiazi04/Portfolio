@@ -7,6 +7,7 @@ import { NotFound } from '@/pages/NotFound';
 // Route-level code splitting: the case studies are the heaviest pages and are
 // not needed for the first paint of the landing page.
 const PharmaErp = lazy(() => import('@/pages/work/PharmaErp'));
+const UniKe = lazy(() => import('@/pages/work/Unike'));
 const FedGuard = lazy(() => import('@/pages/work/FedGuard'));
 const HearingCare = lazy(() => import('@/pages/work/HearingCare'));
 
@@ -28,6 +29,14 @@ export function App() {
           element={
             <Suspense fallback={<RouteFallback />}>
               <PharmaErp />
+            </Suspense>
+          }
+        />
+        <Route
+          path="work/unike"
+          element={
+            <Suspense fallback={<RouteFallback />}>
+              <UniKe />
             </Suspense>
           }
         />

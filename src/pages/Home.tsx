@@ -67,6 +67,20 @@ function Hero() {
   );
 }
 
+/**
+ * Spelled out rather than numeric — "Three builds" reads, "3 builds" does not
+ * at the start of a sentence. Derived from `featured.length` so publishing a
+ * project cannot leave the count behind.
+ */
+const COUNT_WORD: Record<number, string> = {
+  1: 'One build',
+  2: 'Two builds',
+  3: 'Three builds',
+  4: 'Four builds',
+  5: 'Five builds',
+  6: 'Six builds',
+};
+
 function Work() {
   return (
     <section
@@ -78,8 +92,9 @@ function Work() {
         <Reveal>
           <SectionHeading id="work-heading">Selected work</SectionHeading>
           <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-muted">
-            Three builds, each with a case study covering the architecture, the
-            trade-offs behind it and what I changed as a result.
+            {COUNT_WORD[featured.length] ?? `${featured.length} builds`}, each with a case
+            study covering the architecture, the trade-offs behind it and what I changed as
+            a result.
           </p>
         </Reveal>
 

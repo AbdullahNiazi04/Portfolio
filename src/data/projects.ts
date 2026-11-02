@@ -43,9 +43,41 @@ export interface Screenshot {
   caption: string;
 }
 
+/**
+ * A portrait phone capture, for products whose screenshots are 9:19.5 rather
+ * than the landscape shape `Screenshot` assumes. Served from
+ * /img/shot-<project slug>-<name>-{420,840}.webp; width and height are the
+ * intrinsic dimensions of the 840 variant.
+ *
+ * Kept separate from `Screenshot` rather than making its dimensions flexible:
+ * the two never share a layout, and one landscape box fed a portrait image
+ * letterboxes it in accent colour and reads as a mistake.
+ */
+export interface PhoneShot {
+  /** File stem — /img/shot-<slug>-<name>-840.webp. */
+  name: string;
+  width: number;
+  height: number;
+  alt: string;
+  /** Rendered beneath the shot on the case study page. Omitted on cards. */
+  caption?: string;
+}
+
 export interface CaseStudy {
   problem: string;
   screenshot?: Screenshot;
+  /**
+   * Portrait captures for a mobile product, rendered as a framed row instead
+   * of `screenshot`'s single landscape figure. A project has one or the other.
+   */
+  phoneShots?: PhoneShot[];
+  /**
+   * Provenance line under the phone-shot figure: who made the interface, when
+   * it was captured, and anything masked. On a project where the app is
+   * someone else's work, this is where the credit goes — the card has nowhere
+   * to carry it, which is a reason to keep those shots off the card.
+   */
+  phoneShotsNote?: string;
   architecture: string;
   decisions: Decision[];
   /** The headline debugging story. Not every project has one worth telling. */
@@ -75,6 +107,12 @@ export interface Project {
    * Dimensions are the 1400-wide variant, so the card reserves its box.
    */
   preview?: { width: number; height: number; alt: string };
+  /**
+   * Card-level portrait captures, for a mobile product. At most two render —
+   * the card's accent panel is half a grid column, and a third shot there is
+   * 120px wide and illegible.
+   */
+  phonePreview?: PhoneShot[];
 }
 
 /**
@@ -93,6 +131,11 @@ export interface MinorProject {
   detail?: string;
 }
 
+/**
+ * Published featured work, in render order. Unfinished projects live in
+ * `./drafts` and are deliberately not merged in here — see that file for why
+ * the separation is a module boundary rather than a flag.
+ */
 export const featured: Project[] = [
   {
     slug: 'pharma-erp',
@@ -121,6 +164,53 @@ export const featured: Project[] = [
       'Railway',
     ],
     preview: { width: 1400, height: 617, alt: 'The Pharma ERP administrator dashboard' },
+  },
+  {
+    slug: 'unike',
+    title: 'UniKe',
+    subtitle: 'Backend for a mobile AI video creation and streaming app',
+    role: 'Backend/AI Engineer — GoFeast',
+    period: 'Sep 2026 – Oct 2026',
+    status: 'deployed',
+    statusNote:
+      'The API runs on Railway; the Flutter app reached the client as an Android test build, with no public store listing',
+    accent: 'yellow',
+    oneLiner:
+      'A creator writes a prompt in a Flutter app, and the backend I built plans it into 8-second shots with Gemini, renders them on Veo 3.1, stitches them with ffmpeg, and serves the result through home rows, a reels feed and search.',
+    metrics: [
+      { label: 'HTTP endpoints', value: '65', note: 'across 16 controllers' },
+      { label: 'Prisma models', value: '28', note: '10 enums · 11 migrations' },
+      { label: 'Socket events', value: '25', note: '23 pushed · 2 from client' },
+    ],
+    stack: [
+      'NestJS 11',
+      'Fastify 5',
+      'Prisma 6',
+      'PostgreSQL 18',
+      'Google Veo 3.1',
+      'Gemini',
+      'ffmpeg',
+      'Elasticsearch 9',
+    ],
+    /*
+     * Portrait captures, so `preview` stays unset. Two on the card, four on
+     * the case study — the app is a teammate's work, credited in the figure
+     * rather than here, and the card has nowhere to carry that line.
+     */
+    phonePreview: [
+      {
+        name: 'create-project',
+        width: 840,
+        height: 1825,
+        alt: 'UniKe create-project form: type, name, genre and concept',
+      },
+      {
+        name: 'review-generation',
+        width: 840,
+        height: 1825,
+        alt: 'UniKe review screen, showing the prompt and generation settings',
+      },
+    ],
   },
   {
     slug: 'fedguard',
@@ -181,6 +271,15 @@ export const featured: Project[] = [
   },
 ];
 
+/**
+ * Resolves a published project for its case study page. A draft page imports
+ * its own entry from ./drafts instead, which is what keeps draft copy out of
+ * the production bundle.
+ */
+export function projectBySlug(slug: string): Project | undefined {
+  return featured.find((p) => p.slug === slug);
+}
+
 export const alsoBuilt: MinorProject[] = [
   {
     title: 'FilmCeption',
@@ -230,4 +329,25 @@ function assertBlurbLengths(items: MinorProject[]): void {
   }
 }
 
-if (import.meta.env.DEV) assertBlurbLengths(alsoBuilt);
+/**
+ * A draft is scaffolded with TODO markers, and the only thing standing between
+ * those markers and the live site is remembering to replace them. So this
+ * checks: anything published still carrying one is a bug, not a stylistic
+ * choice. Dev-only, like the blurb cap.
+ */
+function assertNoPlaceholders(items: Project[]): void {
+  for (const item of items) {
+    const found = JSON.stringify(item).includes('TODO');
+    if (found) {
+      console.warn(
+        `[projects] "${item.title}" is published but still contains a TODO marker. ` +
+          `Fill it in, or put \`draft: true\` back until you can.`,
+      );
+    }
+  }
+}
+
+if (import.meta.env.DEV) {
+  assertBlurbLengths(alsoBuilt);
+  assertNoPlaceholders(featured);
+}

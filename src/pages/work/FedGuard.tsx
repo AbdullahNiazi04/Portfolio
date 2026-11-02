@@ -1,8 +1,8 @@
 import { CaseStudyPage } from '@/components/CaseStudyPage';
-import { featured } from '@/data/projects';
+import { projectBySlug } from '@/data/projects';
 import caseStudy from '@/data/case-studies/fedguard';
 
-const project = featured.find((p) => p.slug === 'fedguard');
+const project = projectBySlug('fedguard');
 
 export default function FedGuard() {
   if (!project) return null;

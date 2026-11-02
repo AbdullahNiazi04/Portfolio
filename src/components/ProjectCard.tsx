@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { PhonePreview } from './PhoneShots';
 import type { Accent, Project, ProjectStatus } from '@/data/projects';
 
 /** Static class maps — Tailwind cannot see dynamically built class strings. */
@@ -38,8 +39,10 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             reversed ? 'lg:order-2' : 'lg:order-1'
           } [background-image:repeating-linear-gradient(135deg,rgba(255,255,255,0.14)_0_10px,transparent_10px_20px)]`}
         >
-          {/* product screenshot */}
-          {project.preview ? (
+          {/* product screenshot — portrait phone captures, or one landscape shot */}
+          {project.phonePreview ? (
+            <PhonePreview slug={project.slug} shots={project.phonePreview} />
+          ) : project.preview ? (
             <img
               src={`/img/shot-${project.slug}-1400.webp`}
               srcSet={`/img/shot-${project.slug}-700.webp 700w, /img/shot-${project.slug}-1400.webp 1400w`}

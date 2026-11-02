@@ -2,18 +2,32 @@
 
 export interface Role {
   org: string;
-  location: string;
+  /**
+   * Optional, because an unknown location is better left out than guessed.
+   * TODO(abdullah): GoFeast — city, or 'Remote'. Nothing in the repo records it.
+   */
+  location?: string;
   title: string;
   period: string;
   body: string;
 }
 
 /**
- * Reverse-chronological by start date. All four ran concurrently — confirmed,
- * and stated in the section intro rather than left for the reader to notice.
- * Unexplained overlap reads as padding; explained overlap reads as workload.
+ * Reverse-chronological by start date. The four 2025–26 roles ran concurrently
+ * — confirmed, and stated in the section intro rather than left for the reader
+ * to notice. Unexplained overlap reads as padding; explained overlap reads as
+ * workload. GoFeast is the exception: it starts after the ERP role ends, so the
+ * intro no longer claims that every role overlapped.
  */
 export const roles: Role[] = [
+  {
+    org: 'GoFeast',
+    title: 'Backend/AI Engineer',
+    // TODO(abdullah): this is my commit range (2026-09-08 to 2026-10-27), not
+    // confirmed employment dates. Correct it, and say whether the role is open.
+    period: 'Sep 2026 – Oct 2026',
+    body: 'Built the NestJS backend and the AI video pipeline for UniKe, a client’s mobile AI video app, alongside one Flutter developer. Orchestrated Gemini and Google Veo behind a database-backed queue with its own state machine and retry policy, and reported progress directly to the client through scope changes that added a reels feed, a script feature and local video upload.',
+  },
   {
     org: 'Nizron International Technologies',
     location: 'Islamabad',
@@ -77,6 +91,8 @@ export const stackGroups: StackGroup[] = [
       'FastAPI',
       'Nodemailer',
       'Helmet',
+      'Elasticsearch',
+      'ffmpeg (fluent-ffmpeg)',
     ],
   },
   {
@@ -100,6 +116,7 @@ export const stackGroups: StackGroup[] = [
       'scikit-learn',
       'sentence-transformers',
       'Flower (federated learning)',
+      'Google Veo 3.1 / Gemini (@google/genai)',
       'Whisper',
       'TorchScript / PyTorch Mobile',
       'Model optimisation for edge',
@@ -145,6 +162,14 @@ export const principles: Principle[] = [
     body: 'The OOM recovery handler on the Jetson halves the batch and retries instead of losing an eight-hour run. The same instinct applies to retries, timeouts and fallbacks in a backend.',
   },
   {
+    title: 'Make every state change a conditional update',
+    body: 'Write the transition as an update that names the status you expect, then branch on the row count. The loser of a race matches zero rows and backs off, with no lock held, and a late failure cannot overwrite a finished result. Two workers polling one Postgres table ran a video pipeline on this and nothing else.',
+  },
+  {
+    title: 'Check a model’s output in code, not in its request schema',
+    body: 'Gemini rejected shot lists pinned to about 38 shots outright, failing every long video at planning. Asking for a reasonable number and then counting, topping up and trimming the answer turned one provider limit from a failed request into an implementation detail.',
+  },
+  {
     title: 'Audit your own system before someone else does',
     body: 'I audited every endpoint in my ERP and found that authorisation had grown in controller by controller instead of applying by default. That produced a remediation design — a global default-deny guard with an explicit decorator for the routes that genuinely are public — and it changed how I start a backend.',
   },
@@ -156,7 +181,7 @@ export const principles: Principle[] = [
 
 export const about = [
   'I’m a full-stack developer and AI engineer. I build production backends and the interfaces on top of them, and I get models running on hardware that was never meant to run them.',
-  'I designed and built a pharmaceutical ERP that runs against real production data — 480 endpoints and 109 data models covering procurement, batch-tracked inventory, GMP manufacturing records and order-to-cash, serving four separate clients from one API. On the AI side I built a federated learning system that trains a shared hate-speech classifier across three machines, re-engineering the training pipeline so a 4 GB Jetson Nano trained as a full participant rather than only receiving the finished model.',
+  'I designed and built a pharmaceutical ERP that runs against real production data — 480 endpoints and 109 data models covering procurement, batch-tracked inventory, GMP manufacturing records and order-to-cash, serving four separate clients from one API. On the AI side I built a federated learning system that trains a shared hate-speech classifier across three machines, re-engineering the training pipeline so a 4 GB Jetson Nano trained as a full participant rather than only receiving the finished model. Most recently I built the backend and AI video pipeline for UniKe, where Gemini plans a film into 8-second shots, Veo renders them and ffmpeg stitches them, behind a queue that has to survive restarts without paying for the same clip twice.',
   'NestJS, Prisma and Drizzle on the backend; React and Next.js on the front; PyTorch and Flower on the model side. I’m looking for backend or AI platform work.',
 ];
 
@@ -191,7 +216,7 @@ export const currently = {
     'Agentic AI & multi-step automation',
   ],
   direction:
-    'Moving toward AI platform work — retrieval, orchestration and evaluation infrastructure. My model experience so far has been lower-level: fine-tuning, quantising and deploying to constrained hardware rather than integrating hosted LLM APIs.',
+    'Moving toward AI platform work — retrieval, orchestration and evaluation infrastructure. The UniKe backend was the first of that in production: Gemini and Veo orchestrated behind a database-backed queue, a state machine and a retry policy, where the hard part was everything around the model call rather than the call. The rest of my model experience is lower-level — fine-tuning, quantising and deploying to constrained hardware.',
   course: {
     title: 'Generative AI, Cohort 3',
     provider: 'Pak Angels & HEC',
